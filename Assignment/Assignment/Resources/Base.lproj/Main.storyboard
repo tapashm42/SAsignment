@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,12 +14,12 @@
         <scene sceneID="FuO-eW-sHf">
             <objects>
                 <tableViewController title="LanguageRepoListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pB1-yr-4xR" customClass="LanguageRepoListViewController" customModule="Assignment" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cGA-rw-t6h">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cGA-rw-t6h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="LjS-Nu-NRV">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="searchListCell" id="LjS-Nu-NRV">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LjS-Nu-NRV" id="mvc-89-3zu">
@@ -32,11 +33,27 @@
                             <outlet property="delegate" destination="pB1-yr-4xR" id="Qun-6z-qVB"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="MF3-UO-gau"/>
+                    <navigationItem key="navigationItem" title="Search Language" id="MF3-UO-gau"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0ve-aQ-phA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1076" y="784.85757121439292"/>
+        </scene>
+        <!--RepositoryViewController-->
+        <scene sceneID="WdC-74-t8k">
+            <objects>
+                <viewController storyboardIdentifier="RepositoryViewController" title="RepositoryViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ULX-vk-obn" customClass="RepositoryViewController" customModule="Assignment" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="tqO-dv-Hd0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Fbf-pj-qoX"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="RepositoryViewController" largeTitleDisplayMode="always" id="vlB-If-CxD"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dzy-bx-XJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1972" y="785"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NwH-TM-EcG">
