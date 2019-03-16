@@ -23,13 +23,15 @@
 		0377B4E9223AD557006CF040 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377B4E8223AD557006CF040 /* ReachabilityManager.swift */; };
 		0377B4EB223AD56A006CF040 /* NetworkRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377B4EA223AD56A006CF040 /* NetworkRequestModel.swift */; };
 		0377B4ED223AD57D006CF040 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377B4EC223AD57D006CF040 /* NetworkError.swift */; };
-		0377B4F3223C287B006CF040 /* RepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377B4F2223C287B006CF040 /* RepositoryViewController.swift */; };
 		0377B4F5223C2ADF006CF040 /* RepoDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377B4F4223C2ADF006CF040 /* RepoDetailModel.swift */; };
-		0377B4F7223C2BDA006CF040 /* RepositoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377B4F6223C2BDA006CF040 /* RepositoryViewModel.swift */; };
+		0377B4F7223C2BDA006CF040 /* RepositoryDescriptionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377B4F6223C2BDA006CF040 /* RepositoryDescriptionViewModel.swift */; };
 		03AF4D93223D68FA005984D5 /* ConcurrentNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AF4D92223D68FA005984D5 /* ConcurrentNetworkTests.swift */; };
 		03AF4D95223D69ED005984D5 /* DependentOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AF4D94223D69ED005984D5 /* DependentOperationTests.swift */; };
 		03AF4D97223D6A22005984D5 /* CancelNetworkOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AF4D96223D6A22005984D5 /* CancelNetworkOperationTests.swift */; };
 		03AF4D99223D6A57005984D5 /* SeveralNetworkOperationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AF4D98223D6A57005984D5 /* SeveralNetworkOperationsTests.swift */; };
+		03AF4D9B223D6EBF005984D5 /* RepositoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AF4D9A223D6EBF005984D5 /* RepositoryDetailViewController.swift */; };
+		03AF4D9E223D70A9005984D5 /* ARepoDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AF4D9C223D70A9005984D5 /* ARepoDescriptionCell.swift */; };
+		03AF4D9F223D70A9005984D5 /* ARepoDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03AF4D9D223D70A9005984D5 /* ARepoDescriptionCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,13 +65,15 @@
 		0377B4E8223AD557006CF040 /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		0377B4EA223AD56A006CF040 /* NetworkRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestModel.swift; sourceTree = "<group>"; };
 		0377B4EC223AD57D006CF040 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
-		0377B4F2223C287B006CF040 /* RepositoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryViewController.swift; sourceTree = "<group>"; };
 		0377B4F4223C2ADF006CF040 /* RepoDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailModel.swift; sourceTree = "<group>"; };
-		0377B4F6223C2BDA006CF040 /* RepositoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryViewModel.swift; sourceTree = "<group>"; };
+		0377B4F6223C2BDA006CF040 /* RepositoryDescriptionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDescriptionViewModel.swift; sourceTree = "<group>"; };
 		03AF4D92223D68FA005984D5 /* ConcurrentNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentNetworkTests.swift; sourceTree = "<group>"; };
 		03AF4D94223D69ED005984D5 /* DependentOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependentOperationTests.swift; sourceTree = "<group>"; };
 		03AF4D96223D6A22005984D5 /* CancelNetworkOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelNetworkOperationTests.swift; sourceTree = "<group>"; };
 		03AF4D98223D6A57005984D5 /* SeveralNetworkOperationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeveralNetworkOperationsTests.swift; sourceTree = "<group>"; };
+		03AF4D9A223D6EBF005984D5 /* RepositoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailViewController.swift; sourceTree = "<group>"; };
+		03AF4D9C223D70A9005984D5 /* ARepoDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARepoDescriptionCell.swift; sourceTree = "<group>"; };
+		03AF4D9D223D70A9005984D5 /* ARepoDescriptionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ARepoDescriptionCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,7 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				0377B4D2223A84FA006CF040 /* LanguageRepoListViewModel.swift */,
-				0377B4F6223C2BDA006CF040 /* RepositoryViewModel.swift */,
+				0377B4F6223C2BDA006CF040 /* RepositoryDescriptionViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -186,7 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				0377B4CE223A82DD006CF040 /* LanguageRepoListViewController.swift */,
-				0377B4F2223C287B006CF040 /* RepositoryViewController.swift */,
+				03AF4D9A223D6EBF005984D5 /* RepositoryDetailViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -203,6 +207,8 @@
 		0377B4C9223A7DD2006CF040 /* Custom Cells */ = {
 			isa = PBXGroup;
 			children = (
+				03AF4D9C223D70A9005984D5 /* ARepoDescriptionCell.swift */,
+				03AF4D9D223D70A9005984D5 /* ARepoDescriptionCell.xib */,
 			);
 			path = "Custom Cells";
 			sourceTree = "<group>";
@@ -325,6 +331,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03AF4D9F223D70A9005984D5 /* ARepoDescriptionCell.xib in Resources */,
 				0377B4AB223A7C76006CF040 /* LaunchScreen.storyboard in Resources */,
 				0377B4A8223A7C76006CF040 /* Assets.xcassets in Resources */,
 				0377B4A6223A7C75006CF040 /* Main.storyboard in Resources */,
@@ -345,12 +352,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03AF4D9E223D70A9005984D5 /* ARepoDescriptionCell.swift in Sources */,
 				0377B4EB223AD56A006CF040 /* NetworkRequestModel.swift in Sources */,
 				0377B4CF223A82DD006CF040 /* LanguageRepoListViewController.swift in Sources */,
-				0377B4F7223C2BDA006CF040 /* RepositoryViewModel.swift in Sources */,
+				0377B4F7223C2BDA006CF040 /* RepositoryDescriptionViewModel.swift in Sources */,
 				0377B4CB223A7E20006CF040 /* APIConstant.swift in Sources */,
+				03AF4D9B223D6EBF005984D5 /* RepositoryDetailViewController.swift in Sources */,
 				0377B4E7223AD536006CF040 /* ANetworkHelpher.swift in Sources */,
-				0377B4F3223C287B006CF040 /* RepositoryViewController.swift in Sources */,
 				0377B4D1223A8499006CF040 /* LanguageRepoResponse.swift in Sources */,
 				0377B4F5223C2ADF006CF040 /* RepoDetailModel.swift in Sources */,
 				0377B4E9223AD557006CF040 /* ReachabilityManager.swift in Sources */,

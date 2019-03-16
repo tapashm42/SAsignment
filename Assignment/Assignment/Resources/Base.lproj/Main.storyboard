@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -42,18 +41,41 @@
         <!--RepositoryViewController-->
         <scene sceneID="WdC-74-t8k">
             <objects>
-                <viewController storyboardIdentifier="RepositoryViewController" title="RepositoryViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ULX-vk-obn" customClass="RepositoryViewController" customModule="Assignment" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="tqO-dv-Hd0">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <viewLayoutGuide key="safeArea" id="Fbf-pj-qoX"/>
-                    </view>
+                <viewController storyboardIdentifier="RepositoryViewController" title="RepositoryViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ULX-vk-obn" customClass="RepositoryDetailViewController" customModule="Assignment" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="RepositoryViewController" largeTitleDisplayMode="always" id="vlB-If-CxD"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dzy-bx-XJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1972" y="785"/>
+        </scene>
+        <!--RepositoryDetailViewController-->
+        <scene sceneID="YzT-2M-hIe">
+            <objects>
+                <tableViewController storyboardIdentifier="RepositoryDetailViewController" title="RepositoryDetailViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qS1-bY-uMo" customClass="RepositoryDetailViewController" customModule="Assignment" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Z8Y-Jg-cqf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="TeA-nf-w7Y">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TeA-nf-w7Y" id="uZD-AE-uKV">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="qS1-bY-uMo" id="OCq-I0-Zwe"/>
+                            <outlet property="delegate" destination="qS1-bY-uMo" id="mOg-lH-Mz3"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YDG-li-bsm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationItem title="RepositoryDetailViewController" id="M9y-Uw-Q8u"/>
+            </objects>
+            <point key="canvasLocation" x="2671" y="780"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NwH-TM-EcG">

@@ -30,7 +30,6 @@ class LanguageRepoListViewController: UITableViewController {
         searchController.searchBar.sizeToFit()
         self.tableView.tableHeaderView = searchController.searchBar
         self.tableView.tableFooterView = UIView()
-        self.tableView.allowsSelection = true
         
         activityIndicator.center = self.view.center
         activityIndicator.hidesWhenStopped = true
@@ -81,8 +80,13 @@ extension LanguageRepoListViewController {
     }
     
     private func movetoRepositoryViewController(index: Int){
+        
         searchController.dismiss(animated: false, completion: nil)
-        let mRepositoryViewController = UIStoryboard.initializeViewController(RepositoryViewController.self) 
+        let mRepositoryViewController = UIStoryboard.initializeViewController(RepositoryDetailViewController.self)
+        let item = self.languageRepoListViewModel.objectAt(index)
+        if  let fName = item.fullName ,let description = item.description , let repoId = item.id  {
+            mRepositoryViewController.repositoryDescriptionViewModel.repoDetailModel = mRepositoryViewController.repositoryDescriptionViewModel.constructRepoModel(description: description, fName: fName, repoId: repoId)
+        }
         self.navigationController?.pushViewController(mRepositoryViewController, animated: true)
     }
 }
@@ -108,18 +112,5 @@ extension LanguageRepoListViewController {
     }
 }
 
-
-extension LanguageRepoListViewController{
-    
-    func constructRepoModel(index: Int) -> RepoDetailModel? {
-         let  item = self.languageRepoListViewModel.objectAt(index)
-
-        guard  let fName = item.fullName ,let description = item.description , let repoId = item.id else {
-            return nil
-        }
-        let model = RepoDetailModel(description: description, fullName: fName, repoID: repoId )
-        return model
-    }
-}
 
 
