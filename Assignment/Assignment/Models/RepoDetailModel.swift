@@ -7,3 +7,16 @@
 //
 
 import Foundation
+
+struct RepoDetailModel {
+    
+    public private(set) var description: String?
+    public private(set) var fullName: String?
+    public private(set) var repoID: Int = 0
+    
+    init(description: String, fullName:String, repoID:Int) {
+        self.description = description
+        self.fullName = fullName
+        self.repoID = repoID
+    }
+}

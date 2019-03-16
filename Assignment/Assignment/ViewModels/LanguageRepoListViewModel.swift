@@ -24,7 +24,7 @@ struct LanguageRepoListViewModel {
         return self.languageRepoResponses[index]
     }
     
-    mutating  func deleteAllObjects(){
+    mutating  func removeAllPreviousData(){
         self.languageRepoResponses.removeAll()
     }
     

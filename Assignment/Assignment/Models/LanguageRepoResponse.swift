@@ -9,9 +9,9 @@
 import Foundation
 
 struct LanguageRepositoryResponse: Codable {
-    let totalCount: Int
-    let incompleteResults: Bool
-    let items: [Item]
+    let totalCount: Int?
+    let incompleteResults: Bool?
+    let items: [Item]?
     
     enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"
@@ -21,51 +21,55 @@ struct LanguageRepositoryResponse: Codable {
 }
 
 struct Item: Codable {
-    let id: Int
-    let nodeID, name, fullName: String
-    let itemPrivate: Bool
+    let id: Int?
+    let nodeID, name, fullName: String?
+    let itemPrivate: Bool!
     let owner: Owner
-    let htmlURL: String
-    let description: String
-    let fork: Bool
-    var url, forksURL: String
-    let keysURL, collaboratorsURL: String
+    let htmlURL: String?
+    let description: String?
+    let fork: Bool!
+    var url, forksURL: String?
+    let keysURL, collaboratorsURL: String?
     
-    let teamsURL, hooksURL: String
-    let issueEventsURL: String
-    let eventsURL: String
-    let assigneesURL, branchesURL: String
-    let tagsURL: String
-    let blobsURL, gitTagsURL, gitRefsURL, treesURL: String
-    let statusesURL: String
-    let languagesURL, stargazersURL, contributorsURL, subscribersURL: String
-    let subscriptionURL: String
-    let commitsURL, gitCommitsURL, commentsURL, issueCommentURL: String
-    let contentsURL, compareURL: String
-    let mergesURL: String
-    let archiveURL: String
-    let downloadsURL: String
-    let issuesURL, pullsURL, milestonesURL, notificationsURL: String
-    let labelsURL, releasesURL: String
+    let teamsURL, hooksURL: String?
+    let issueEventsURL: String?
+    let eventsURL: String?
+    let assigneesURL, branchesURL: String?
+    let tagsURL: String?
+    let blobsURL, gitTagsURL, gitRefsURL, treesURL: String?
+    let statusesURL: String?
+    let languagesURL, stargazersURL, contributorsURL, subscribersURL: String?
+    let subscriptionURL: String?
+    let commitsURL, gitCommitsURL, commentsURL, issueCommentURL: String?
+    let contentsURL, compareURL: String?
+    let mergesURL: String?
+    let archiveURL: String?
+    let downloadsURL: String?
+    let issuesURL, pullsURL, milestonesURL, notificationsURL: String?
+    let labelsURL, releasesURL: String?
     
-    let deploymentsURL: String
-    let createdAt, updatedAt, pushedAt: Date
-    let gitURL, sshURL: String
-    let cloneURL: String
-    let svnURL: String
+    let deploymentsURL: String?
+    let createdAt, updatedAt, pushedAt: Date?
+    let gitURL, sshURL: String?
+    let cloneURL: String?
+    let svnURL: String?
     let homepage: String?
-    let size, stargazersCount, watchersCount: Int
-    let language: Language
-    let hasIssues, hasProjects, hasDownloads, hasWiki: Bool
-    let hasPages: Bool
-    let forksCount: Int
+    let size, stargazersCount, watchersCount: Int?
+    let language: String?
+    let hasIssues: Bool!
+    let  hasProjects: Bool!
+    let  hasDownloads: Bool!
+    let  hasWiki: Bool!
+
+    let hasPages: Bool!
+    let forksCount: Int?
     let mirrorURL: String?
-    let archived: Bool
-    let openIssuesCount: Int
+    let archived: Bool!
+    let openIssuesCount: Int?
     let license: License?
-    let forks, openIssues, watchers: Int
-    let defaultBranch: DefaultBranch
-    let score: Int
+    let forks, openIssues, watchers: Int?
+    let defaultBranch: String?
+    let score: Int?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -139,112 +143,89 @@ struct Item: Codable {
         case score
     }
     
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        //so on...
-        id = try values.decode(Int.self, forKey: .id)
-        nodeID = try values.decode(String.self, forKey: .nodeID)
-        name = try values.decode(String.self, forKey: .name)
-        fullName = try values.decode(String.self, forKey: .fullName)
-        itemPrivate = try values.decode(Bool.self, forKey: .itemPrivate)
+    init(from decodeIfPresentr: Decoder) throws {
+        let values = try decodeIfPresentr.container(keyedBy: CodingKeys.self)
+        
+        id = try? values.decodeIfPresent(Int.self, forKey: .id) ?? 0
+        nodeID = try? values.decodeIfPresent(String.self, forKey: .nodeID) ?? ""
+        name = try? values.decodeIfPresent(String.self, forKey: .name) ?? ""
+        fullName = try? values.decodeIfPresent(String.self, forKey: .fullName) ?? ""
+        itemPrivate = try values.decodeIfPresent(Bool.self, forKey: .itemPrivate) ?? false
         owner = try values.decode(Owner.self, forKey: .owner)
-        htmlURL = try values.decode(String.self, forKey: .htmlURL)
-        description = try values.decode(String.self, forKey: .description)
-        fork = try values.decode(Bool.self, forKey: .fork)
-        url = try values.decode(String.self, forKey: .url)
-        forksURL = try values.decode(String.self, forKey: .forksURL)
-        keysURL = try values.decode(String.self, forKey: .keysURL)
-        collaboratorsURL = try values.decode(String.self, forKey: .collaboratorsURL)
-        teamsURL = try values.decode(String.self, forKey: .teamsURL)
-        hooksURL = try values.decode(String.self, forKey: .hooksURL)
-        issueEventsURL = try values.decode(String.self, forKey: .issueEventsURL)
-        eventsURL = try values.decode(String.self, forKey: .eventsURL)
-        assigneesURL = try values.decode(String.self, forKey: .assigneesURL)
-        branchesURL = try values.decode(String.self, forKey: .branchesURL)
-        tagsURL = try values.decode(String.self, forKey: .tagsURL)
-        blobsURL = try values.decode(String.self, forKey: .blobsURL)
-        gitTagsURL = try values.decode(String.self, forKey: .gitTagsURL)
-        gitRefsURL = try values.decode(String.self, forKey: .gitRefsURL)
-        treesURL = try values.decode(String.self, forKey: .treesURL)
-        statusesURL = try values.decode(String.self, forKey: .statusesURL)
-        languagesURL = try values.decode(String.self, forKey: .languagesURL)
-        stargazersURL = try values.decode(String.self, forKey: .stargazersURL)
-        contributorsURL = try values.decode(String.self, forKey: .contributorsURL)
-        subscribersURL = try values.decode(String.self, forKey: .subscribersURL)
-        subscriptionURL = try values.decode(String.self, forKey: .subscriptionURL)
-        commitsURL = try values.decode(String.self, forKey: .commitsURL)
-        gitCommitsURL = try values.decode(String.self, forKey: .gitCommitsURL)
-        commentsURL = try values.decode(String.self, forKey: .commentsURL)
-        issueCommentURL = try values.decode(String.self, forKey: .issueCommentURL)
-        contentsURL = try values.decode(String.self, forKey: .contentsURL)
-        compareURL = try values.decode(String.self, forKey: .compareURL)
-        mergesURL = try values.decode(String.self, forKey: .mergesURL)
-        archiveURL = try values.decode(String.self, forKey: .archiveURL)
-        downloadsURL = try values.decode(String.self, forKey: .downloadsURL)
-        issuesURL = try values.decode(String.self, forKey: .issuesURL)
-        pullsURL = try values.decode(String.self, forKey: .pullsURL)
-        milestonesURL = try values.decode(String.self, forKey: .milestonesURL)
-        notificationsURL = try values.decode(String.self, forKey: .notificationsURL)
-        labelsURL = try values.decode(String.self, forKey: .labelsURL)
-        releasesURL = try values.decode(String.self, forKey: .releasesURL)
-        deploymentsURL = try values.decode(String.self, forKey: .deploymentsURL)
-        createdAt = try values.decode(Date.self, forKey: .createdAt)
-        updatedAt = try values.decode(Date.self, forKey: .updatedAt)
-        pushedAt = try values.decode(Date.self, forKey: .pushedAt)
-        gitURL = try values.decode(String.self, forKey: .gitURL)
-        sshURL = try values.decode(String.self, forKey: .sshURL)
-        cloneURL = try values.decode(String.self, forKey: .cloneURL)
-        svnURL = try values.decode(String.self, forKey: .svnURL)
-        if let _homepage = try? values.decode(String.self, forKey: .homepage) {
-            homepage = _homepage
-        } else {
-            homepage = ""
-        }
-        size = try values.decode(Int.self, forKey: .size)
-        stargazersCount = try values.decode(Int.self, forKey: .stargazersCount)
-        watchersCount = try values.decode(Int.self, forKey: .watchersCount)
-        language = try values.decode(Language.self, forKey: .language)
-        hasIssues = try values.decode(Bool.self, forKey: .hasIssues)
-        hasProjects = try values.decode(Bool.self, forKey: .hasProjects)
-        hasDownloads = try values.decode(Bool.self, forKey: .hasDownloads)
-        hasWiki = try values.decode(Bool.self, forKey: .hasWiki)
-        hasPages = try values.decode(Bool.self, forKey: .hasPages)
-        archived = try values.decode(Bool.self, forKey: .archived)
-        forksCount = try values.decode(Int.self, forKey: .forksCount)
-        if let _mirrorURL = try? values.decode(String.self, forKey: .mirrorURL) {
-            mirrorURL = _mirrorURL
-        } else {
-            mirrorURL = ""
-        }
-        openIssuesCount = try values.decode(Int.self, forKey: .openIssuesCount)
-        if let _license = try? values.decode(License.self, forKey: .license) {
-            license = _license
-        } else {
-            license = nil
-        }
-        forks = try values.decode(Int.self, forKey: .forks)
-        openIssues = try values.decode(Int.self, forKey: .openIssues)
-        watchers = try values.decode(Int.self, forKey: .watchers)
-        defaultBranch = try values.decode(DefaultBranch.self, forKey: .defaultBranch)
-        score = try values.decode(Int.self, forKey: .score)
-
+        htmlURL = try? values.decodeIfPresent(String.self, forKey: .htmlURL) ?? ""
+        description = try? values.decodeIfPresent(String.self, forKey: .description) ?? ""
+        fork = try values.decodeIfPresent(Bool.self, forKey: .fork) ?? false
+        url = try? values.decodeIfPresent(String.self, forKey: .url) ?? ""
+        forksURL = try? values.decodeIfPresent(String.self, forKey: .forksURL) ?? ""
+        keysURL = try? values.decodeIfPresent(String.self, forKey: .keysURL) ?? ""
+        collaboratorsURL = try? values.decodeIfPresent(String.self, forKey: .collaboratorsURL) ?? ""
+        teamsURL = try? values.decodeIfPresent(String.self, forKey: .teamsURL) ?? ""
+        hooksURL = try? values.decodeIfPresent(String.self, forKey: .hooksURL) ?? ""
+        issueEventsURL = try? values.decodeIfPresent(String.self, forKey: .issueEventsURL) ?? ""
+        eventsURL = try? values.decodeIfPresent(String.self, forKey: .eventsURL) ?? ""
+        assigneesURL = try? values.decodeIfPresent(String.self, forKey: .assigneesURL) ?? ""
+        branchesURL = try? values.decodeIfPresent(String.self, forKey: .branchesURL) ?? ""
+        tagsURL = try? values.decodeIfPresent(String.self, forKey: .tagsURL) ?? ""
+        blobsURL = try? values.decodeIfPresent(String.self, forKey: .blobsURL) ?? ""
+        gitTagsURL = try? values.decodeIfPresent(String.self, forKey: .gitTagsURL) ?? ""
+        gitRefsURL = try? values.decodeIfPresent(String.self, forKey: .gitRefsURL) ?? ""
+        treesURL = try? values.decodeIfPresent(String.self, forKey: .treesURL) ?? ""
+        statusesURL = try? values.decodeIfPresent(String.self, forKey: .statusesURL) ?? ""
+        languagesURL = try? values.decodeIfPresent(String.self, forKey: .languagesURL) ?? ""
+        stargazersURL = try? values.decodeIfPresent(String.self, forKey: .stargazersURL) ?? ""
+        contributorsURL = try? values.decodeIfPresent(String.self, forKey: .contributorsURL) ?? ""
+        subscribersURL = try? values.decodeIfPresent(String.self, forKey: .subscribersURL) ?? ""
+        subscriptionURL = try? values.decodeIfPresent(String.self, forKey: .subscriptionURL) ?? ""
+        commitsURL = try? values.decodeIfPresent(String.self, forKey: .commitsURL) ?? ""
+        gitCommitsURL = try? values.decodeIfPresent(String.self, forKey: .gitCommitsURL) ?? ""
+        commentsURL = try? values.decodeIfPresent(String.self, forKey: .commentsURL) ?? ""
+        issueCommentURL = try? values.decodeIfPresent(String.self, forKey: .issueCommentURL) ?? ""
+        contentsURL = try? values.decodeIfPresent(String.self, forKey: .contentsURL) ?? ""
+        compareURL = try? values.decodeIfPresent(String.self, forKey: .compareURL) ?? ""
+        mergesURL = try? values.decodeIfPresent(String.self, forKey: .mergesURL) ?? ""
+        archiveURL = try? values.decodeIfPresent(String.self, forKey: .archiveURL) ?? ""
+        downloadsURL = try? values.decodeIfPresent(String.self, forKey: .downloadsURL) ?? ""
+        issuesURL = try? values.decodeIfPresent(String.self, forKey: .issuesURL) ?? ""
+        pullsURL = try? values.decodeIfPresent(String.self, forKey: .pullsURL) ?? ""
+        milestonesURL = try? values.decodeIfPresent(String.self, forKey: .milestonesURL) ?? ""
+        notificationsURL = try? values.decodeIfPresent(String.self, forKey: .notificationsURL) ?? ""
+        labelsURL = try? values.decodeIfPresent(String.self, forKey: .labelsURL) ?? ""
+        releasesURL = try? values.decodeIfPresent(String.self, forKey: .releasesURL) ?? ""
+        deploymentsURL = try? values.decodeIfPresent(String.self, forKey: .deploymentsURL) ?? ""
+        createdAt = try values.decodeIfPresent(Date.self, forKey: .createdAt)
+        updatedAt = try values.decodeIfPresent(Date.self, forKey: .updatedAt)
+        pushedAt = try values.decodeIfPresent(Date.self, forKey: .pushedAt)
+        gitURL = try? values.decodeIfPresent(String.self, forKey: .gitURL) ?? ""
+        sshURL = try? values.decodeIfPresent(String.self, forKey: .sshURL) ?? ""
+        cloneURL = try? values.decodeIfPresent(String.self, forKey: .cloneURL) ?? ""
+        svnURL = try? values.decodeIfPresent(String.self, forKey: .svnURL) ?? ""
+        homepage = try? values.decodeIfPresent(String.self, forKey: .homepage) ?? ""
+        size = try? values.decodeIfPresent(Int.self, forKey: .size) ?? 0
+        stargazersCount = try? values.decodeIfPresent(Int.self, forKey: .stargazersCount) ?? 0
+        watchersCount = try? values.decodeIfPresent(Int.self, forKey: .watchersCount) ?? 0
+        language = try? values.decodeIfPresent(String.self, forKey: .language) ?? ""
+        hasIssues = try values.decodeIfPresent(Bool.self, forKey: .hasIssues) ?? false
+        hasProjects = try values.decodeIfPresent(Bool.self, forKey: .hasProjects) ?? false
+        hasDownloads = try values.decodeIfPresent(Bool.self, forKey: .hasDownloads) ?? false
+         hasWiki = try values.decodeIfPresent(Bool.self, forKey: .hasWiki) ?? false
+         hasPages = try values.decodeIfPresent(Bool.self, forKey: .hasPages) ?? false
+        archived = try values.decodeIfPresent(Bool.self, forKey: .archived) ?? false
+        forksCount = try? values.decodeIfPresent(Int.self, forKey: .forksCount) ?? 0
+        mirrorURL = try? values.decodeIfPresent(String.self, forKey: .mirrorURL) ?? ""
+        openIssuesCount = try? values.decodeIfPresent(Int.self, forKey: .openIssuesCount) ?? 0
+        license = try values.decodeIfPresent(License.self, forKey: .license)
+        forks = try? values.decodeIfPresent(Int.self, forKey: .forks) ?? 0
+        openIssues = try? values.decodeIfPresent(Int.self, forKey: .openIssues) ?? 0
+        watchers = try values.decodeIfPresent(Int.self, forKey: .watchers) ?? 0
+        defaultBranch = try values.decodeIfPresent(String.self, forKey: .defaultBranch) ?? ""
+        score = try? values.decodeIfPresent(Int.self, forKey: .score) ?? 0
     }
-    
-}
-
-enum DefaultBranch: String, Codable {
-    case develop = "develop"
-    case master = "master"
-}
-
-enum Language: String, Codable {
-    case swift = "Swift"
 }
 
 struct License: Codable {
-    let key, name, spdxID: String
+    let key, name, spdxID: String?
     let url: String?
-    let nodeID: String
+    let nodeID: String?
     
     enum CodingKeys: String, CodingKey {
         case key, name
@@ -253,33 +234,30 @@ struct License: Codable {
         case nodeID = "node_id"
     }
     
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        key = try values.decode(String.self, forKey: .key)
-        name = try values.decode(String.self, forKey: .name)
-        spdxID = try values.decode(String.self, forKey: .spdxID)
-        if let _url = try? values.decode(String.self, forKey: .url) {
-            url = _url
-        } else {
-            url = ""
-        }
-        nodeID = try values.decode(String.self, forKey: .nodeID)
+    init(from decodeIfPresentr: Decoder) throws {
+        let values = try decodeIfPresentr.container(keyedBy: CodingKeys.self)
+        
+        key = try? values.decodeIfPresent(String.self, forKey: .key) ?? ""
+        name = try? values.decodeIfPresent(String.self, forKey: .name) ?? ""
+        spdxID = try? values.decodeIfPresent(String.self, forKey: .spdxID) ?? ""
+        url = try? values.decodeIfPresent(String.self, forKey: .url) ?? ""
+        nodeID = try? values.decodeIfPresent(String.self, forKey: .nodeID) ?? ""
     }
 }
 
 struct Owner: Codable {
-    let login: String
-    let id: Int
-    let nodeID: String
-    let avatarURL: String
-    let gravatarID: String
-    let url, htmlURL, followersURL: String
-    let followingURL, gistsURL, starredURL: String
-    let subscriptionsURL, organizationsURL, reposURL: String
-    let eventsURL: String
-    let receivedEventsURL: String
-    let type: TypeEnum
-    let siteAdmin: Bool
+    let login: String?
+    let id: Int?
+    let nodeID: String?
+    let avatarURL: String?
+    let gravatarID: String?
+    let url, htmlURL, followersURL: String?
+    let followingURL, gistsURL, starredURL: String?
+    let subscriptionsURL, organizationsURL, reposURL: String?
+    let eventsURL: String?
+    let receivedEventsURL: String?
+    let type: String?
+    let siteAdmin: Bool!
     
     enum CodingKeys: String, CodingKey {
         case login, id
@@ -300,36 +278,28 @@ struct Owner: Codable {
         case type
         case siteAdmin = "site_admin"
     }
+    
+    init(from decodeIfPresentr: Decoder) throws {
+        let values = try decodeIfPresentr.container(keyedBy: CodingKeys.self)
+        
+        login = try? values.decodeIfPresent(String.self, forKey: .login) ?? ""
+        id = try? values.decodeIfPresent(Int.self, forKey: .id) ?? 0
+        nodeID = try? values.decodeIfPresent(String.self, forKey: .nodeID) ?? ""
+        avatarURL = try? values.decodeIfPresent(String.self, forKey: .avatarURL) ?? ""
+        gravatarID = try? values.decodeIfPresent(String.self, forKey: .gravatarID) ?? ""
+        url = try? values.decodeIfPresent(String.self, forKey: .url) ?? ""
+        htmlURL = try? values.decodeIfPresent(String.self, forKey: .htmlURL) ?? ""
+        followersURL = try? values.decodeIfPresent(String.self, forKey: .followersURL) ?? ""
+        followingURL = try? values.decodeIfPresent(String.self, forKey: .followingURL) ?? ""
+        gistsURL = try? values.decodeIfPresent(String.self, forKey: .gistsURL) ?? ""
+        starredURL = try? values.decodeIfPresent(String.self, forKey: .starredURL) ?? ""
+        subscriptionsURL = try? values.decodeIfPresent(String.self, forKey: .subscriptionsURL) ?? ""
+        organizationsURL = try? values.decodeIfPresent(String.self, forKey: .organizationsURL) ?? ""
+        reposURL = try? values.decodeIfPresent(String.self, forKey: .reposURL) ?? ""
+        eventsURL = try? values.decodeIfPresent(String.self, forKey: .eventsURL) ?? ""
+        receivedEventsURL = try? values.decodeIfPresent(String.self, forKey: .receivedEventsURL) ?? ""
+        type = try? values.decodeIfPresent(String.self, forKey: .type) ?? ""
+        siteAdmin = try? values.decodeIfPresent(Bool.self, forKey: .siteAdmin) ?? false
+    }
 }
 
-enum TypeEnum: String, Codable {
-    case organization = "Organization"
-    case user = "User"
-}
-
-// MARK: Encode/decode helpers
-
-/*class JSONNull: Codable, Hashable {
-    
-    public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
-        return true
-    }
-    
-    public var hashValue: Int {
-        return 0
-    }
-    
-    public init() {}
-    
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if !container.decodeNil() {
-            throw DecodingError.typeMismatch(JSONNull.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for JSONNull"))
-        }
-    }
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encodeNil()
-    }
-}*/

@@ -23,6 +23,13 @@
 		0377B4E9223AD557006CF040 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377B4E8223AD557006CF040 /* ReachabilityManager.swift */; };
 		0377B4EB223AD56A006CF040 /* NetworkRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377B4EA223AD56A006CF040 /* NetworkRequestModel.swift */; };
 		0377B4ED223AD57D006CF040 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377B4EC223AD57D006CF040 /* NetworkError.swift */; };
+		0377B4F3223C287B006CF040 /* RepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377B4F2223C287B006CF040 /* RepositoryViewController.swift */; };
+		0377B4F5223C2ADF006CF040 /* RepoDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377B4F4223C2ADF006CF040 /* RepoDetailModel.swift */; };
+		0377B4F7223C2BDA006CF040 /* RepositoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0377B4F6223C2BDA006CF040 /* RepositoryViewModel.swift */; };
+		03AF4D93223D68FA005984D5 /* ConcurrentNetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AF4D92223D68FA005984D5 /* ConcurrentNetworkTests.swift */; };
+		03AF4D95223D69ED005984D5 /* DependentOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AF4D94223D69ED005984D5 /* DependentOperationTests.swift */; };
+		03AF4D97223D6A22005984D5 /* CancelNetworkOperationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AF4D96223D6A22005984D5 /* CancelNetworkOperationTests.swift */; };
+		03AF4D99223D6A57005984D5 /* SeveralNetworkOperationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AF4D98223D6A57005984D5 /* SeveralNetworkOperationsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +63,13 @@
 		0377B4E8223AD557006CF040 /* ReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
 		0377B4EA223AD56A006CF040 /* NetworkRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestModel.swift; sourceTree = "<group>"; };
 		0377B4EC223AD57D006CF040 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		0377B4F2223C287B006CF040 /* RepositoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryViewController.swift; sourceTree = "<group>"; };
+		0377B4F4223C2ADF006CF040 /* RepoDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoDetailModel.swift; sourceTree = "<group>"; };
+		0377B4F6223C2BDA006CF040 /* RepositoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryViewModel.swift; sourceTree = "<group>"; };
+		03AF4D92223D68FA005984D5 /* ConcurrentNetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentNetworkTests.swift; sourceTree = "<group>"; };
+		03AF4D94223D69ED005984D5 /* DependentOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependentOperationTests.swift; sourceTree = "<group>"; };
+		03AF4D96223D6A22005984D5 /* CancelNetworkOperationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelNetworkOperationTests.swift; sourceTree = "<group>"; };
+		03AF4D98223D6A57005984D5 /* SeveralNetworkOperationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeveralNetworkOperationsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,10 +119,7 @@
 				0377B4C2223A7CF0006CF040 /* Extensions */,
 				0377B4C1223A7CE2006CF040 /* Resources */,
 				0377B4C0223A7CD7006CF040 /* Services */,
-				0377B4A0223A7C75006CF040 /* AppDelegate.swift */,
-				0377B4A4223A7C75006CF040 /* Main.storyboard */,
 				0377B4A7223A7C76006CF040 /* Assets.xcassets */,
-				0377B4A9223A7C76006CF040 /* LaunchScreen.storyboard */,
 				0377B4AC223A7C76006CF040 /* Info.plist */,
 			);
 			path = Assignment;
@@ -119,6 +130,10 @@
 			children = (
 				0377B4B5223A7C76006CF040 /* AssignmentTests.swift */,
 				0377B4B7223A7C76006CF040 /* Info.plist */,
+				03AF4D92223D68FA005984D5 /* ConcurrentNetworkTests.swift */,
+				03AF4D94223D69ED005984D5 /* DependentOperationTests.swift */,
+				03AF4D96223D6A22005984D5 /* CancelNetworkOperationTests.swift */,
+				03AF4D98223D6A57005984D5 /* SeveralNetworkOperationsTests.swift */,
 			);
 			path = AssignmentTests;
 			sourceTree = "<group>";
@@ -135,6 +150,9 @@
 		0377B4C1223A7CE2006CF040 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0377B4A0223A7C75006CF040 /* AppDelegate.swift */,
+				0377B4A4223A7C75006CF040 /* Main.storyboard */,
+				0377B4A9223A7C76006CF040 /* LaunchScreen.storyboard */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -159,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				0377B4D2223A84FA006CF040 /* LanguageRepoListViewModel.swift */,
+				0377B4F6223C2BDA006CF040 /* RepositoryViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -167,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				0377B4CE223A82DD006CF040 /* LanguageRepoListViewController.swift */,
+				0377B4F2223C287B006CF040 /* RepositoryViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -175,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				0377B4D0223A8499006CF040 /* LanguageRepoResponse.swift */,
+				0377B4F4223C2ADF006CF040 /* RepoDetailModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -326,9 +347,12 @@
 			files = (
 				0377B4EB223AD56A006CF040 /* NetworkRequestModel.swift in Sources */,
 				0377B4CF223A82DD006CF040 /* LanguageRepoListViewController.swift in Sources */,
+				0377B4F7223C2BDA006CF040 /* RepositoryViewModel.swift in Sources */,
 				0377B4CB223A7E20006CF040 /* APIConstant.swift in Sources */,
 				0377B4E7223AD536006CF040 /* ANetworkHelpher.swift in Sources */,
+				0377B4F3223C287B006CF040 /* RepositoryViewController.swift in Sources */,
 				0377B4D1223A8499006CF040 /* LanguageRepoResponse.swift in Sources */,
+				0377B4F5223C2ADF006CF040 /* RepoDetailModel.swift in Sources */,
 				0377B4E9223AD557006CF040 /* ReachabilityManager.swift in Sources */,
 				0377B4D3223A84FA006CF040 /* LanguageRepoListViewModel.swift in Sources */,
 				0377B4E5223AD501006CF040 /* NetworkOperation.swift in Sources */,
@@ -343,7 +367,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03AF4D99223D6A57005984D5 /* SeveralNetworkOperationsTests.swift in Sources */,
+				03AF4D97223D6A22005984D5 /* CancelNetworkOperationTests.swift in Sources */,
+				03AF4D95223D69ED005984D5 /* DependentOperationTests.swift in Sources */,
 				0377B4B6223A7C76006CF040 /* AssignmentTests.swift in Sources */,
+				03AF4D93223D68FA005984D5 /* ConcurrentNetworkTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,7 +456,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -483,7 +511,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -500,6 +528,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UA5SATFL9Y;
 				INFOPLIST_FILE = Assignment/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -518,6 +547,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = UA5SATFL9Y;
 				INFOPLIST_FILE = Assignment/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

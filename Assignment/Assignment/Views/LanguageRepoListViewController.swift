@@ -11,11 +11,17 @@ import UIKit
 class LanguageRepoListViewController: UITableViewController {
     
     let searchController = UISearchController(searchResultsController: nil)
+    let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+    
     private var languageRepoListViewModel = LanguageRepoListViewModel()
-
+    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
+        setupInitialUI()
+    }
+    
+    func setupInitialUI() {
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
         searchController.searchBar.showsSearchResultsButton = true
@@ -23,11 +29,14 @@ class LanguageRepoListViewController: UITableViewController {
         searchController.dimsBackgroundDuringPresentation = false
         searchController.searchBar.sizeToFit()
         self.tableView.tableHeaderView = searchController.searchBar
+        self.tableView.tableFooterView = UIView()
+        self.tableView.allowsSelection = true
+        
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        self.view.addSubview(activityIndicator)
     }
-    
 }
-
-
 
 extension LanguageRepoListViewController: UISearchResultsUpdating,UISearchBarDelegate{
     
@@ -36,16 +45,14 @@ extension LanguageRepoListViewController: UISearchResultsUpdating,UISearchBarDel
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print("searchBar.text\(String(describing: searchBar.text))")
         guard let searchText = searchBar.text else {
             return
         }
         getlanguageRepoList(language: searchText)
     }
-    
 }
 
-extension LanguageRepoListViewController{
+extension LanguageRepoListViewController {
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -57,47 +64,61 @@ extension LanguageRepoListViewController{
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "searchListCell", for: indexPath)
         let item = self.languageRepoListViewModel.objectAt(indexPath.row)
         cell.textLabel?.text = item.fullName
-        cell.textLabel?.backgroundColor = UIColor.blue
+        cell.textLabel?.backgroundColor = UIColor.clear
         return cell
     }
     
 }
 
-extension LanguageRepoListViewController{
+extension LanguageRepoListViewController {
     
     // MARK: - Table view delegate
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        movetoRepositoryViewController(index: indexPath.row)
+    }
+    
+    private func movetoRepositoryViewController(index: Int){
+        searchController.dismiss(animated: false, completion: nil)
+        let mRepositoryViewController = UIStoryboard.initializeViewController(RepositoryViewController.self) 
+        self.navigationController?.pushViewController(mRepositoryViewController, animated: true)
     }
 }
 
-extension LanguageRepoListViewController{
-    // MARK: - Navigation
+extension LanguageRepoListViewController {
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-}
-
-extension LanguageRepoListViewController{
-    
-    func getlanguageRepoList(language: String){
+    func getlanguageRepoList(language: String) {
         
-        ANetworkHelpher.shared.getRepositorySpecificToLanguage(language: language, success: { [weak self](items) in
+        self.activityIndicator.startAnimating()
+        self.languageRepoListViewModel.removeAllPreviousData()
+        ANetworkHelpher.shared.getRepositorySpecificToLanguage(language: language, success: { [weak self] (items) in
             guard let items = items else{return}
             self?.languageRepoListViewModel.addLanguageRepoViewModel(items)
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
+                self?.activityIndicator.stopAnimating()
             }
-        }, failure: { (networkError) in
-            print(networkError.statusCode)
+            }, failure: { [weak self]  (networkError) in
+                print(networkError.statusCode)
+                self?.tableView.reloadData()
+                self?.activityIndicator.stopAnimating()
         })
-        
+    }
+}
+
+
+extension LanguageRepoListViewController{
+    
+    func constructRepoModel(index: Int) -> RepoDetailModel? {
+         let  item = self.languageRepoListViewModel.objectAt(index)
+
+        guard  let fName = item.fullName ,let description = item.description , let repoId = item.id else {
+            return nil
+        }
+        let model = RepoDetailModel(description: description, fullName: fName, repoID: repoId )
+        return model
     }
 }
 

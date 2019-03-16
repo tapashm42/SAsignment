@@ -12,15 +12,21 @@ final class ANetworkHelpher {
     
     static let shared = ANetworkHelpher()
     private init() { }
-    
+
     // MARK: - Operation Queue
-    fileprivate lazy var downloadQueue: OperationQueue = {
+   fileprivate  lazy var downloadQueue: OperationQueue = {
         var queue = OperationQueue()
-        queue.name = "com.itcinfotech.spiceclubNetworkingQueue"
+        queue.name = "com.itcinfotech.NetworkingQueue"
         queue.maxConcurrentOperationCount = 5
         return queue
     }()
     
+}
+
+extension ANetworkHelpher {
+    public func privateDownloadQueueTestInstance() -> OperationQueue {
+        return self.downloadQueue
+    }
 }
 
 // MARK: - Cancelling APIs (General)
@@ -49,9 +55,6 @@ extension ANetworkHelpher{
         }
         
         let url = "\(APIConstant.kBASE_URL)\(APIConstant.kSEARCH_REPOSITORIES.urlString)\(language)\(APIConstant.kSORTING_ORDER)"
-
-        
-        print("SEARCH_REPOSITORIES request url: %@",url)
         let requestModel = NetworkRequestModel(url: url,
                                                taskIdentifier: APIConstant.kSEARCH_REPOSITORIES.identifier,
                                                httpMethod: .GET,
@@ -59,22 +62,31 @@ extension ANetworkHelpher{
                                                headers: [APIHeadersKeyAndValue.kAuthKey:APIHeadersKeyAndValue.kAuthKeyValue])
         let networkOperation = NetworkOperation(model: requestModel) { (model, data, response, error, statusCode, isSuccess) in
             if isSuccess {
-                //Here it's coming as a string
-                let jsonString = String(decoding: data!, as: UTF8.self)
-                let jsonData = jsonString.data(using: .utf8)
-                print("jsonData:\(jsonData)")
-                //Problem is Here languageRepoResponse is nil
-                let languageRepoResponse = try? JSONDecoder().decode(LanguageRepositoryResponse.self, from: data!)
+                
+                let dateFormatterWithTime: DateFormatter = {
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                    return formatter
+                }()
+                
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
+                    let container = try decoder.singleValueContainer()
+                    let dateStr = try container.decode(String.self)
+                    var date: Date? = nil
+                    date = dateFormatterWithTime.date(from: dateStr)
+                    guard let date_ = date else {
+                        throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot decode date string \(dateStr)")
+                    }
+                    return date_
+                })
+                
+                let languageRepoResponse = try? decoder.decode(LanguageRepositoryResponse.self, from: data!)
                 if let incompleteResults = languageRepoResponse?.incompleteResults {
                     if !incompleteResults {
-                        print("languageRepoResponse: %@",languageRepoResponse ?? "")
-                        
                         success(languageRepoResponse?.items)
                     } else {
                         failure(NetworkError.init(statusCode: Int(truncating: NSNumber(value:incompleteResults))))
-                        
-                         //1
-
                     }
                 }
                 else {
@@ -89,7 +101,7 @@ extension ANetworkHelpher{
     }
     
     func cancelSearchRepositories() {
-        ANetworkHelpher.shared.cancelOperation(identifier: APIConstant.kSEARCH_REPOSITORIES.identifier)
+        self.cancelOperation(identifier: APIConstant.kSEARCH_REPOSITORIES.identifier)
     }
 }
 
