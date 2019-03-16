@@ -32,6 +32,7 @@
 		03AF4D9B223D6EBF005984D5 /* RepositoryDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AF4D9A223D6EBF005984D5 /* RepositoryDetailViewController.swift */; };
 		03AF4D9E223D70A9005984D5 /* ARepoDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AF4D9C223D70A9005984D5 /* ARepoDescriptionCell.swift */; };
 		03AF4D9F223D70A9005984D5 /* ARepoDescriptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03AF4D9D223D70A9005984D5 /* ARepoDescriptionCell.xib */; };
+		03AF4DA1223D9020005984D5 /* RepoIssueModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03AF4DA0223D9020005984D5 /* RepoIssueModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 		03AF4D9A223D6EBF005984D5 /* RepositoryDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryDetailViewController.swift; sourceTree = "<group>"; };
 		03AF4D9C223D70A9005984D5 /* ARepoDescriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARepoDescriptionCell.swift; sourceTree = "<group>"; };
 		03AF4D9D223D70A9005984D5 /* ARepoDescriptionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ARepoDescriptionCell.xib; sourceTree = "<group>"; };
+		03AF4DA0223D9020005984D5 /* RepoIssueModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepoIssueModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +202,7 @@
 			children = (
 				0377B4D0223A8499006CF040 /* LanguageRepoResponse.swift */,
 				0377B4F4223C2ADF006CF040 /* RepoDetailModel.swift */,
+				03AF4DA0223D9020005984D5 /* RepoIssueModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				03AF4D9B223D6EBF005984D5 /* RepositoryDetailViewController.swift in Sources */,
 				0377B4E7223AD536006CF040 /* ANetworkHelpher.swift in Sources */,
 				0377B4D1223A8499006CF040 /* LanguageRepoResponse.swift in Sources */,
+				03AF4DA1223D9020005984D5 /* RepoIssueModel.swift in Sources */,
 				0377B4F5223C2ADF006CF040 /* RepoDetailModel.swift in Sources */,
 				0377B4E9223AD557006CF040 /* ReachabilityManager.swift in Sources */,
 				0377B4D3223A84FA006CF040 /* LanguageRepoListViewModel.swift in Sources */,

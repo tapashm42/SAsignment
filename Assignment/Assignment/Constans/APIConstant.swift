@@ -14,6 +14,11 @@ struct APIConstant {
     static let kSEARCH_REPOSITORIES = (urlString: "/search/repositories?q=language:", identifier: "1")
     static let kSEARCH_COMMITS     = (urlString: "/search/commits?q=", identifier: "2")
     static let kSORTING_ORDER = "&sort=stars&order=desc"
+    static let kSEARCH_ISSUES     = (urlString: "/search/issues?q=", identifier: "2")
+    //static let kSEARCH_CONTRIBUTORS     = (urlString: "/search/issues?q=", identifier: "2")
+
+//    https://api.github.com/search/issues?q=vsouza/awesome-ios+label:bug+language:swift+state:open&sort=created&order=asc
+
     
 }
 
