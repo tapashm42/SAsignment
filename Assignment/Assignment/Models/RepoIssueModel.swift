@@ -9,40 +9,39 @@
 import Foundation
 
 struct RepoIssueModel: Codable {
-    
-    let totalCount: Int
-    let incompleteResults: Bool
+    let totalCount: Int?
+    let incompleteResults: Bool?
     let issues: [Issue]
-    
+
     enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"
         case incompleteResults = "incomplete_results"
-        case items
+        case issues = "items"
     }
 }
 
 struct Issue: Codable {
-    let url: String
-    let repositoryURL: String
-    let labelsURL: String
-    let commentsURL, eventsURL, htmlURL: String
-    let id: Int
-    let nodeID: String
-    let number: Int
-    let title: String
+    let url: String?
+    let repositoryURL: String?
+    let labelsURL: String?
+    let commentsURL, eventsURL, htmlURL: String?
+    let id: Int?
+    let nodeID: String?
+    let number: Int?
+    let title: String?
     let user: User
-    let labels: [Label]
+    let labels: [Label]?
     let state: State
-    let locked: Bool
+    let locked: Bool?
     let assignee: User?
-    let assignees: [User]
-    let milestone: JSONNull?
-    let comments: Int
-    let createdAt, updatedAt: Date
-    let closedAt: JSONNull?
-    let authorAssociation: AuthorAssociation
-    let body: String
-    let score: Double
+    let assignees: [User]?
+    let milestone: String?
+    let comments: Int?
+    let createdAt, updatedAt: Date?
+    let closedAt: String?
+    let authorAssociation: AuthorAssociation?
+    let body: String?
+    let score: Double?
     
     enum CodingKeys: String, CodingKey {
         case url
@@ -60,21 +59,50 @@ struct Issue: Codable {
         case authorAssociation = "author_association"
         case body, score
     }
+    
+    init(from decodeIfPresentr: Decoder) throws {
+        let values = try decodeIfPresentr.container(keyedBy: CodingKeys.self)
+        
+        url = try? values.decodeIfPresent(String.self, forKey: .url) ?? ""
+        repositoryURL = try? values.decodeIfPresent(String.self, forKey: .repositoryURL) ?? ""
+        labelsURL = try? values.decodeIfPresent(String.self, forKey: .labelsURL) ?? ""
+        commentsURL = try? values.decodeIfPresent(String.self, forKey: .commentsURL) ?? ""
+        eventsURL = try? values.decodeIfPresent(String.self, forKey: .eventsURL) ?? ""
+        htmlURL = try? values.decodeIfPresent(String.self, forKey: .htmlURL) ?? ""
+        id = try? values.decodeIfPresent(Int.self, forKey: .id) ?? 0
+        nodeID = try? values.decodeIfPresent(String.self, forKey: .nodeID) ?? ""
+        number = try? values.decodeIfPresent(Int.self, forKey: .number) ?? 0
+        title = try? values.decodeIfPresent(String.self, forKey: .title) ?? ""
+        user = try values.decode(User.self, forKey: .user)
+        labels = try values.decodeIfPresent([Label].self, forKey: .labels)
+        state = try values.decode(State.self, forKey: .state)
+        locked = try? values.decodeIfPresent(Bool.self, forKey: .locked) ?? false
+        assignee = try values.decodeIfPresent(User.self, forKey: .assignee)
+        assignees = try values.decodeIfPresent([User].self, forKey: .assignees)
+        milestone = try? values.decodeIfPresent(String.self, forKey: .milestone) ?? ""
+        comments = try? values.decodeIfPresent(Int.self, forKey: .comments) ?? 0
+        createdAt = try values.decodeIfPresent(Date.self, forKey: .createdAt)
+        updatedAt = try values.decodeIfPresent(Date.self, forKey: .updatedAt)
+        closedAt = try values.decodeIfPresent(String.self, forKey: .closedAt)
+        authorAssociation = try values.decodeIfPresent(AuthorAssociation.self, forKey: .authorAssociation)
+        body = try values.decodeIfPresent(String.self, forKey: .body) ?? ""
+        score = try? values.decodeIfPresent(Double.self, forKey: .score) ?? 0.0
+    }
 }
 
 struct User: Codable {
-    let login: String
-    let id: Int
-    let nodeID: String
-    let avatarURL: String
-    let gravatarID: String
-    let url, htmlURL, followersURL: String
-    let followingURL, gistsURL, starredURL: String
-    let subscriptionsURL, organizationsURL, reposURL: String
-    let eventsURL: String
-    let receivedEventsURL: String
+    let login: String?
+    let id: Int?
+    let nodeID: String?
+    let avatarURL: String?
+    let gravatarID: String?
+    let url, htmlURL, followersURL: String?
+    let followingURL, gistsURL, starredURL: String?
+    let subscriptionsURL, organizationsURL, reposURL: String?
+    let eventsURL: String?
+    let receivedEventsURL: String?
     let type: TypeEnum
-    let siteAdmin: Bool
+    let siteAdmin: Bool?
     
     enum CodingKeys: String, CodingKey {
         case login, id
@@ -95,6 +123,30 @@ struct User: Codable {
         case type
         case siteAdmin = "site_admin"
     }
+    
+    init(from decodeIfPresentr: Decoder) throws {
+        let values = try decodeIfPresentr.container(keyedBy: CodingKeys.self)
+        
+        login = try? values.decodeIfPresent(String.self, forKey: .login) ?? ""
+        id = try? values.decodeIfPresent(Int.self, forKey: .id) ?? 0
+        nodeID = try? values.decodeIfPresent(String.self, forKey: .nodeID) ?? ""
+        avatarURL = try? values.decodeIfPresent(String.self, forKey: .avatarURL) ?? ""
+        gravatarID = try? values.decodeIfPresent(String.self, forKey: .gravatarID) ?? ""
+        htmlURL = try? values.decodeIfPresent(String.self, forKey: .htmlURL) ?? ""
+        url = try? values.decodeIfPresent(String.self, forKey: .url) ?? ""
+        followersURL = try? values.decodeIfPresent(String.self, forKey: .followersURL) ?? ""
+        followingURL = try? values.decodeIfPresent(String.self, forKey: .followingURL) ?? ""
+        gistsURL = try? values.decodeIfPresent(String.self, forKey: .gistsURL) ?? ""
+        starredURL = try? values.decodeIfPresent(String.self, forKey: .starredURL) ?? ""
+        subscriptionsURL = try? values.decodeIfPresent(String.self, forKey: .subscriptionsURL) ?? ""
+        organizationsURL = try? values.decodeIfPresent(String.self, forKey: .organizationsURL) ?? ""
+        reposURL = try? values.decodeIfPresent(String.self, forKey: .reposURL) ?? ""
+        eventsURL = try? values.decodeIfPresent(String.self, forKey: .eventsURL) ?? ""
+        receivedEventsURL = try? values.decodeIfPresent(String.self, forKey: .receivedEventsURL) ?? ""
+        type = try values.decode(TypeEnum.self, forKey: .type)
+        siteAdmin = try values.decodeIfPresent(Bool.self, forKey: .siteAdmin) ?? false
+    }
+    
 }
 
 enum TypeEnum: String, Codable {
@@ -110,11 +162,11 @@ enum AuthorAssociation: String, Codable {
 }
 
 struct Label: Codable {
-    let id: Int
-    let nodeID: String
-    let url: String
-    let name, color: String
-    let labelDefault: Bool
+    let id: Int?
+    let nodeID: String?
+    let url: String?
+    let name, color: String?
+    let labelDefault: Bool?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -122,35 +174,19 @@ struct Label: Codable {
         case url, name, color
         case labelDefault = "default"
     }
+    
+    init(from decodeIfPresentr: Decoder) throws {
+        let values = try decodeIfPresentr.container(keyedBy: CodingKeys.self)
+        
+        id = try? values.decodeIfPresent(Int.self, forKey: .id) ?? 0
+        nodeID = try? values.decodeIfPresent(String.self, forKey: .nodeID) ?? ""
+        url = try? values.decodeIfPresent(String.self, forKey: .url) ?? ""
+        name = try? values.decodeIfPresent(String.self, forKey: .name) ?? ""
+        color = try? values.decodeIfPresent(String.self, forKey: .color) ?? ""
+        labelDefault = try? values.decodeIfPresent(Bool.self, forKey: .labelDefault) ?? false
+    }
 }
 
 enum State: String, Codable {
     case stateOpen = "open"
-}
-
-// MARK: Encode/decode helpers
-
-class JSONNull: Codable, Hashable {
-    
-    public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
-        return true
-    }
-    
-    public var hashValue: Int {
-        return 0
-    }
-    
-    public init() {}
-    
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if !container.decodeNil() {
-            throw DecodingError.typeMismatch(JSONNull.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for JSONNull"))
-        }
-    }
-    
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
-        try container.encodeNil()
-    }
 }

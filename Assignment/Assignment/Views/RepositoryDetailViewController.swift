@@ -9,14 +9,17 @@
 import UIKit
 
 class RepositoryDetailViewController: UITableViewController {
-
+    
     let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
     
     var repositoryDescriptionViewModel =  RepositoryDescriptionViewModel()
-
+    var repoIssueViewModel =  RepoIssueViewModel()
+    var repoContributorViewModel =  RepoContributorViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupInitialUI()
+        getRepoIssueList()
     }
     
     func setupInitialUI() {
@@ -41,7 +44,7 @@ extension RepositoryDetailViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
-        
+    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return CellType.allCases[section].HeaderTitle
     }
@@ -53,10 +56,10 @@ extension RepositoryDetailViewController {
         case .descriptionCell:
             return 1
         case .issuecell:
-            return 3
+            return self.repoIssueViewModel.numberOfRowsInSection()
         case .contributorCell:
             return 3
-
+            
         }
     }
     
@@ -81,11 +84,63 @@ extension RepositoryDetailViewController {
         case .descriptionCell:
             let cell = cell as! ARepoDescriptionCell
             cell.repoDetailModel = self.repositoryDescriptionViewModel.repoDetailModel
-             return cell
-        default:
             return cell
+            
+        case .issuecell:
+            let issue = self.repoIssueViewModel.objectAt(indexPath.row)
+            cell.textLabel?.text = issue.title
+            return cell
+            
+        case .contributorCell:
+            return cell
+            
         }
-
+        
     }
 }
+
+extension RepositoryDetailViewController{
+    
+    func getRepoIssueList() {
+        
+        self.activityIndicator.startAnimating()
+        
+        ANetworkHelpher.shared.getIssuesSpecificToRepository(repoName: self.repositoryDescriptionViewModel.repoDetailModel.fullName, language: self.repositoryDescriptionViewModel.repoDetailModel.language, success: { [weak self] (issues) in
+            guard let issues = issues else{return}
+            self?.repoIssueViewModel.addIssuesToViewModel(issues)
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+                self?.activityIndicator.stopAnimating()
+            }
+            }, failure: { [weak self] (networkError) in
+                print(networkError.statusCode)
+                self?.tableView.reloadData()
+                self?.activityIndicator.stopAnimating()
+        })
+        
+    }
+}
+
+extension RepositoryDetailViewController{
+    
+    func getRepoContributorList() {
+        
+        self.activityIndicator.startAnimating()
+        
+        ANetworkHelpher.shared.getIssuesSpecificToRepository(repoName: self.repositoryDescriptionViewModel.repoDetailModel.fullName, language: self.repositoryDescriptionViewModel.repoDetailModel.language, success: { [weak self] (issues) in
+            guard let issues = issues else{return}
+            self?.repoIssueViewModel.addIssuesToViewModel(issues)
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+                self?.activityIndicator.stopAnimating()
+            }
+            }, failure: { [weak self] (networkError) in
+                print(networkError.statusCode)
+                self?.tableView.reloadData()
+                self?.activityIndicator.stopAnimating()
+        })
+        
+    }
+}
+
 

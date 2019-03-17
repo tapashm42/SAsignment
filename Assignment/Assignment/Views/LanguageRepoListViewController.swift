@@ -24,6 +24,7 @@ class LanguageRepoListViewController: UITableViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
+        searchController.searchBar.placeholder = "Please enter any language."
         searchController.searchBar.showsSearchResultsButton = true
         searchController.hidesNavigationBarDuringPresentation = true
         searchController.dimsBackgroundDuringPresentation = false
@@ -85,7 +86,7 @@ extension LanguageRepoListViewController {
         let mRepositoryViewController = UIStoryboard.initializeViewController(RepositoryDetailViewController.self)
         let item = self.languageRepoListViewModel.objectAt(index)
         if  let fName = item.fullName ,let description = item.description , let repoId = item.id  {
-            mRepositoryViewController.repositoryDescriptionViewModel.repoDetailModel = mRepositoryViewController.repositoryDescriptionViewModel.constructRepoModel(description: description, fName: fName, repoId: repoId)
+            mRepositoryViewController.repositoryDescriptionViewModel.repoDetailModel = mRepositoryViewController.repositoryDescriptionViewModel.constructRepoModel(description: description, fName: fName, repoId: repoId,language: self.searchController.searchBar.text ?? "")
         }
         self.navigationController?.pushViewController(mRepositoryViewController, animated: true)
     }

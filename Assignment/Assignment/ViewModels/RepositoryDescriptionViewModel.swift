@@ -47,8 +47,8 @@ extension CellType{
 struct RepositoryDescriptionViewModel {
      var repoDetailModel: RepoDetailModel!
     
-   mutating func constructRepoModel(description: String,fName: String, repoId:Int) -> RepoDetailModel? {
-        let model = RepoDetailModel(description: description, fullName: fName, repoID: repoId)
+    mutating func constructRepoModel(description: String,fName: String, repoId:Int, language: String) -> RepoDetailModel? {
+        let model = RepoDetailModel(description: description, fullName: fName, repoID: repoId,language: language)
         return model
     }
 }
