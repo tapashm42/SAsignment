@@ -10,7 +10,7 @@ import Foundation
 
 struct RepoIssueViewModel {
     
-    private var issueRepoResponses = [Issue]()
+    private var issueRepoResponses = [Issue]() 
     
     /**
      This is a method add items to the  array.

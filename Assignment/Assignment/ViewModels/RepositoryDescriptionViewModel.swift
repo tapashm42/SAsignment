@@ -36,10 +36,10 @@ extension CellType{
             switch self {
             case .descriptionCell:
                 return "ARepoDescriptionCell"
-            case .issuecell:
-                return "ARepoIssueCell"
+            case .issuecell :
+                fallthrough
             case .contributorCell:
-                return "ARepoContributorCell"
+                return "ACell"
             }
         }
     }

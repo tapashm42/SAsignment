@@ -35,8 +35,8 @@ class RepositoryDetailViewController: UITableViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         self.tableView.register(UINib.init(nibName: "ARepoDescriptionCell", bundle: nil), forCellReuseIdentifier: "ARepoDescriptionCell")
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ARepoIssueCell")
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ARepoContributorCell")
+        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ACell")
+//        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "ARepoContributorCell")
         self.tableView.estimatedRowHeight = 30
         self.tableView.rowHeight = UITableView.automaticDimension
         self.tableView.tableFooterView = UIView()
@@ -89,7 +89,6 @@ extension RepositoryDetailViewController {
      - Returns: A table view cell containing all the necessary ui elements.
      */
     func getSpecificCell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        indexPath.row
         let section = CellType.allCases[indexPath.section]
         let cell = tableView.dequeueReusableCell(withIdentifier: section.cellIdentifier, for: indexPath)
         cell.selectionStyle = .none
