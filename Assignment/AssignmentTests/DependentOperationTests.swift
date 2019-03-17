@@ -34,7 +34,7 @@ class DependentOperationTests: XCTestCase {
             }
         }
         
-        let requestModel1 = NetworkRequestModel(url: "http://google.com",
+        let requestModel1 = NetworkRequestModel(url: APIConstant.kBASE_URL,
                                                 taskIdentifier: "Task 1",
                                                 httpMethod: .GET,
                                                 body: nil,
@@ -43,13 +43,15 @@ class DependentOperationTests: XCTestCase {
         let networkOperation1 = NetworkOperation(model: requestModel1) { (model, data, response, error, statusCode, isSuccess) in
             if isSuccess {
                 actualTaskSequence.append(model.taskIdentifier)
+                XCTAssertTrue(isSuccess, "Failed")
             } else {
-                
+                XCTAssertFalse(isSuccess, "Successfully failed")
+
             }
         }
         
         
-        let requestModel2 = NetworkRequestModel(url: "http://google.com",
+        let requestModel2 = NetworkRequestModel(url: APIConstant.kBASE_URL,
                                                 taskIdentifier: "Task 2",
                                                 httpMethod: .GET,
                                                 body: nil,
@@ -58,12 +60,14 @@ class DependentOperationTests: XCTestCase {
         let networkOperation2 = NetworkOperation(model: requestModel2) { (model, data, response, error, statusCode, isSuccess) in
             if isSuccess {
                 actualTaskSequence.append(model.taskIdentifier)
+                XCTAssertTrue(isSuccess, "Failed")
             } else {
+                XCTAssertFalse(isSuccess, "Successfully failed")
                 
             }
         }
         
-        let requestModel3 = NetworkRequestModel(url: "http://google.com",
+        let requestModel3 = NetworkRequestModel(url: APIConstant.kBASE_URL,
                                                 taskIdentifier: "Task 3",
                                                 httpMethod: .GET,
                                                 body: nil,
@@ -72,22 +76,27 @@ class DependentOperationTests: XCTestCase {
         let networkOperation3 = NetworkOperation(model: requestModel3) { (model, data, response, error, statusCode, isSuccess) in
             if isSuccess {
                 actualTaskSequence.append(model.taskIdentifier)
+                XCTAssertTrue(isSuccess, "Failed")
             } else {
+                XCTAssertFalse(isSuccess, "Successfully failed")
                 
             }
         }
         
         
-        let requestModel4 = NetworkRequestModel(url: "http://google.com",
+        let requestModel4 = NetworkRequestModel(url: APIConstant.kBASE_URL,
                                                 taskIdentifier: "Task 4",
                                                 httpMethod: .GET,
                                                 body: nil,
                                                 headers: nil)
         
         let networkOperation4 = NetworkOperation(model: requestModel4) { (model, data, response, error, statusCode, isSuccess) in
+            
             if isSuccess {
                 actualTaskSequence.append(model.taskIdentifier)
+                XCTAssertTrue(isSuccess, "Failed")
             } else {
+                XCTAssertFalse(isSuccess, "Successfully failed")
                 
             }
         }

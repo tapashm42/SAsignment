@@ -34,7 +34,7 @@ class SeveralNetworkOperationsTests: XCTestCase {
         }
         
         for count in 1...20 {
-            let requestModel = NetworkRequestModel(url: "http://google.com",
+            let requestModel = NetworkRequestModel(url: APIConstant.kBASE_URL,
                                                    taskIdentifier: String(count),
                                                    httpMethod: .GET,
                                                    body: nil,
@@ -42,9 +42,10 @@ class SeveralNetworkOperationsTests: XCTestCase {
             let networkOperation = NetworkOperation(model: requestModel) { (model, data, response, error, statusCode, isSuccess) in
                 if isSuccess {
                     completed.append(model.taskIdentifier)
+                    XCTAssertTrue(isSuccess, "Failed")
                     print("ID --> \(model.taskIdentifier) Count -> \(count) ")
                 } else {
-                    
+                    XCTAssertFalse(isSuccess, "Failed successfully")
                 }
             }
             queue.addOperations([networkOperation], waitUntilFinished: false)

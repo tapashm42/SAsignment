@@ -10,10 +10,16 @@ import UIKit
 
 class RepositoryDetailViewController: UITableViewController {
     
+    /// This is an **indicator** to show *loading* while downloading data from server.
     let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
     
+    /// This is a **ViewModel** object of *RepositoryDescriptionViewModel* holds the data and presentation logic.
     var repositoryDescriptionViewModel =  RepositoryDescriptionViewModel()
+    
+    /// This is a **ViewModel** object of *RepoIssueViewModel* holds the data and presentation logic.
     var repoIssueViewModel =  RepoIssueViewModel()
+    
+    /// This is a **ViewModel** object of *RepoContributorViewModel* holds the data and presentation logic.
     var repoContributorViewModel =  RepoContributorViewModel()
     
     override func viewDidLoad() {
@@ -22,6 +28,9 @@ class RepositoryDetailViewController: UITableViewController {
         getRepoIssueList()
     }
     
+    /**
+     This method does all the neccessary UI setup including navigation title size,tableview cell register,activityIndicator.
+     */
     func setupInitialUI() {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
@@ -71,11 +80,16 @@ extension RepositoryDetailViewController {
     
 }
 
-
 extension RepositoryDetailViewController {
     
+    /**
+     This is a method gives specific cell based on specific section or cell identifier.
+     - Parameter tableView: It's the tableview of the class.
+     - Parameter indexPath:  `IndexPath` represents the path to a specific node in a tree of nested array collections.
+     - Returns: A table view cell containing all the necessary ui elements.
+     */
     func getSpecificCell(tableView: UITableView, indexPath: IndexPath) -> UITableViewCell {
-        
+        indexPath.row
         let section = CellType.allCases[indexPath.section]
         let cell = tableView.dequeueReusableCell(withIdentifier: section.cellIdentifier, for: indexPath)
         cell.selectionStyle = .none
@@ -104,6 +118,9 @@ extension RepositoryDetailViewController {
 
 extension RepositoryDetailViewController{
     
+    /**
+     This is a method fetches issues related to a specific repository.
+     */
     func getRepoIssueList() {
         
         self.activityIndicator.startAnimating()
@@ -128,6 +145,9 @@ extension RepositoryDetailViewController{
 
 extension RepositoryDetailViewController{
     
+    /**
+     This is a method fetches contributor list related to a specific repository.
+     */
     func getRepoContributorList() {
         
         self.activityIndicator.startAnimating()

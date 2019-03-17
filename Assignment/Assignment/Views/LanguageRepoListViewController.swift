@@ -10,9 +10,13 @@ import UIKit
 
 class LanguageRepoListViewController: UITableViewController {
     
+    /// This is a **searchController** to serach *specific language* based on user's input.
     let searchController = UISearchController(searchResultsController: nil)
+    
+    /// This is an **indicator** to show *loading* while downloading data from server.
     let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
     
+    /// This is a **ViewModel** object of *LanguageRepoListViewModel* holds the data and presentation logic.
     private var languageRepoListViewModel = LanguageRepoListViewModel()
     
     override func viewDidLoad() {
@@ -20,6 +24,9 @@ class LanguageRepoListViewController: UITableViewController {
         setupInitialUI()
     }
     
+    /**
+     This method does all the neccessary UI setup including navigation title size,searchController,activityIndicator.
+     */
     func setupInitialUI() {
         self.navigationController?.navigationBar.prefersLargeTitles = true
         searchController.searchResultsUpdater = self
@@ -38,12 +45,15 @@ class LanguageRepoListViewController: UITableViewController {
     }
 }
 
+
 extension LanguageRepoListViewController: UISearchResultsUpdating,UISearchBarDelegate{
     
+    // MARK: - Search controller delegate
     func updateSearchResults(for searchController: UISearchController) {
-        //
+        
     }
     
+    // MARK: - Search bar delegate
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.text else {
             return
@@ -80,6 +90,11 @@ extension LanguageRepoListViewController {
         movetoRepositoryViewController(index: indexPath.row)
     }
     
+    /**
+     This is a method that navigates to the RepositoryDetailViewController.
+     
+     - Parameter index: It's use to give Item from languageRepoListViewModel for the specific index only.
+     */
     private func movetoRepositoryViewController(index: Int){
         
         searchController.dismiss(animated: false, completion: nil)
@@ -94,6 +109,11 @@ extension LanguageRepoListViewController {
 
 extension LanguageRepoListViewController {
     
+    /**
+     This is a method that fetches repositories related to a specific language.
+     
+     - Parameter language: It's the queried language.
+     */
     func getlanguageRepoList(language: String) {
         
         self.activityIndicator.startAnimating()

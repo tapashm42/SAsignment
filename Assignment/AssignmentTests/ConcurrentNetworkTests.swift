@@ -25,17 +25,13 @@ class ConcurrentNetworkTests: XCTestCase {
     func testMaximumConcurrentOperations() {
         queue.cancelAllOperations()
         for count in 1...10 {
-            let requestModel = NetworkRequestModel(url: "http://google.com",
+            let requestModel = NetworkRequestModel(url: APIConstant.kBASE_URL,
                                                    taskIdentifier: String(count),
                                                    httpMethod: .GET,
                                                    body: nil,
                                                    headers: nil)
             let networkOperation = NetworkOperation(model: requestModel) { (model, data, response, error, statusCode, isSuccess) in
-                if isSuccess {
-                    print("Count -> \(count) ")
-                } else {
-                    
-                }
+                XCTAssertTrue(isSuccess, "Failed")
             }
             queue.addOperations([networkOperation], waitUntilFinished: false)
         }
@@ -57,16 +53,19 @@ class ConcurrentNetworkTests: XCTestCase {
         }
         
         for task in startedTasksID {
-            let requestModel = NetworkRequestModel(url: "http://google.com",
+            let requestModel = NetworkRequestModel(url: APIConstant.kBASE_URL,
                                                    taskIdentifier: task,
                                                    httpMethod: .GET,
                                                    body: nil,
                                                    headers: nil)
             let networkOperation = NetworkOperation(model: requestModel) { (model, data, response, error, statusCode, isSuccess) in
+                
                 if isSuccess {
                     competedTaskID.append(model.taskIdentifier)
+                    XCTAssertTrue(isSuccess, "Failed")
                 } else {
-                    
+                    XCTAssertFalse(isSuccess, "Successfully failed")
+
                 }
             }
             queue.addOperations([networkOperation], waitUntilFinished: false)

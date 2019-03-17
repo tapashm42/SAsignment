@@ -33,11 +33,7 @@ class CancelNetworkOperationTests: XCTestCase {
                                                    body: nil,
                                                    headers: nil)
             let networkOperation = NetworkOperation(model: requestModel) { (model, data, response, error, statusCode, isSuccess) in
-                if isSuccess {
-                    print("ID --> \(model.taskIdentifier) Count -> \(count) ")
-                } else {
-                    print("\(error as NSError?)")
-                }
+                XCTAssertTrue(isSuccess, "Failed")
             }
             queue.addOperations([networkOperation], waitUntilFinished: false)
             
