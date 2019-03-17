@@ -161,15 +161,19 @@ extension ANetworkHelpher{
 
 extension ANetworkHelpher{
     
-    func getContributorsSpecificToRepository(query: String, success _success: @escaping ([Item]?) -> Void, failure _failure: @escaping (NetworkError) -> Void) {
-        let success: ([Item]?) -> Void = { contributors in
+    func getContributorsSpecificToRepository(repoName: String,language: String, success _success: @escaping ([Contributor]?) -> Void, failure _failure: @escaping (NetworkError) -> Void) {
+        let success: ([Contributor]?) -> Void = { contributors in
             DispatchQueue.main.async { _success(contributors) }
         }
         let failure: (NetworkError) -> Void = { error in
             DispatchQueue.main.async { _failure(error) }
         }
         
-        let url = "\(APIConstant.kBASE_URL)\(APIConstant.kSEARCH_REPOSITORIES.urlString)\(query)\(APIConstant.kSEARCH_SORTING_ORDER)"
+        let url = "\(APIConstant.kBASE_URL)\(APIConstant.kSEARCH_COMMITS.urlString)repo:\(repoName)+language:\(language)\(APIConstant.kCONTRIBUTOR_SORTING_ORDER)"
+        
+        //https://api.github.com/search/commits?q=repo:Alamofire/Alamofire+language:Swift&sort=committer-date&order=desc&per_page=3
+
+        
         let requestModel = NetworkRequestModel(url: url,
                                                taskIdentifier: APIConstant.kSEARCH_REPOSITORIES.identifier,
                                                httpMethod: .GET,
@@ -192,10 +196,10 @@ extension ANetworkHelpher{
                     return date_
                 })
                 
-                let languageRepoResponse = try? decoder.decode(LanguageRepositoryResponse.self, from: data!)
-                if let incompleteResults = languageRepoResponse?.incompleteResults {
+                let repoContributorModel = try? decoder.decode(RepoContributorModel.self, from: data!)
+                if let incompleteResults = repoContributorModel?.incompleteResults {
                     if !incompleteResults {
-                        success(languageRepoResponse?.items)
+                        success(repoContributorModel?.contributors)
                     } else {
                         failure(NetworkError.init(statusCode: Int(truncating: NSNumber(value:incompleteResults))))
                     }
@@ -212,7 +216,7 @@ extension ANetworkHelpher{
     }
     
     func cancelRepositories() {
-        self.cancelOperation(identifier: APIConstant.kSEARCH_REPOSITORIES.identifier)
+        self.cancelOperation(identifier: APIConstant.kSEARCH_COMMITS.identifier)
     }
 }
 

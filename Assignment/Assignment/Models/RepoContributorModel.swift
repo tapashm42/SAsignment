@@ -9,72 +9,49 @@
 import Foundation
 
 struct RepoContributorModel: Codable {
-    let totalCount: Int
-    let incompleteResults: Bool
-    let contributors: [Contributor]
+    let totalCount: Int?
+    let incompleteResults: Bool?
+    let contributors: [Contributor]?
     
     enum CodingKeys: String, CodingKey {
         case totalCount = "total_count"
         case incompleteResults = "incomplete_results"
-        case contributors
+        case contributors = "items"
     }
 }
 
 struct Contributor: Codable {
-    let url: String
-    let repositoryURL: String
-    let labelsURL: String
-    let commentsURL, eventsURL, htmlURL: String
-    let id: Int
-    let nodeID: String
-//    let number: Int
-//    let title: String
-//    let user: User
-//    let labels: [Label]
-//    let state: State
-//    let locked: Bool
-//    let assignee: User?
-//    let assignees: [User]
-//    let milestone: JSONNull?
-//    let comments: Int
-//    let createdAt, updatedAt: Date
-//    let closedAt: JSONNull?
-//    let authorAssociation: AuthorAssociation
-    let body: String
-    let score: Double
+    let url: String?
+    let sha, nodeID: String?
+    let htmlURL, commentsURL: String?
+    let commit: Commit?
+    let author, committer: OwnerClass?
+    let parents: [Parent]?
+    let repository: Repository?
+    let score: Double?
     
     enum CodingKeys: String, CodingKey {
-        case url
-        case repositoryURL = "repository_url"
-        case labelsURL = "labels_url"
-        case commentsURL = "comments_url"
-        case eventsURL = "events_url"
-        case htmlURL = "html_url"
-        case id
+        case url, sha
         case nodeID = "node_id"
-//        case number, title, user, labels, state, locked, assignee, assignees, milestone, comments
-//        case createdAt = "created_at"
-//        case updatedAt = "updated_at"
-//        case closedAt = "closed_at"
-//        case authorAssociation = "author_association"
-        case body, score
+        case htmlURL = "html_url"
+        case commentsURL = "comments_url"
+        case commit, author, committer, parents, repository, score
     }
 }
 
-/*
-struct User: Codable {
-    let login: String
-    let id: Int
-    let nodeID: String
-    let avatarURL: String
-    let gravatarID: String
-    let url, htmlURL, followersURL: String
-    let followingURL, gistsURL, starredURL: String
-    let subscriptionsURL, organizationsURL, reposURL: String
-    let eventsURL: String
-    let receivedEventsURL: String
-    let type: TypeEnum
-    let siteAdmin: Bool
+struct OwnerClass: Codable {
+    let login: String?
+    let id: Int?
+    let nodeID: String?
+    let avatarURL: String?
+    let gravatarID: String?
+    let url, htmlURL, followersURL: String?
+    let followingURL, gistsURL, starredURL: String?
+    let subscriptionsURL, organizationsURL, reposURL: String?
+    let eventsURL: String?
+    let receivedEventsURL: String?
+    let type: String?
+    let siteAdmin: Bool?
     
     enum CodingKeys: String, CodingKey {
         case login, id
@@ -97,56 +74,111 @@ struct User: Codable {
     }
 }
 
-enum TypeEnum: String, Codable {
-    case user = "User"
+struct Commit: Codable {
+    let url: String?
+    let author, committer: CommitAuthor?
+    let message: String?
+    let tree: Tree?
+    let commentCount: Int?
+    
+    enum CodingKeys: String, CodingKey {
+        case url, author, committer, message, tree
+        case commentCount = "comment_count"
+    }
 }
 
-enum AuthorAssociation: String, Codable {
-    case collaborator = "COLLABORATOR"
-    case contributor = "CONTRIBUTOR"
-    case member = "MEMBER"
-    case none = "NONE"
-    case owner = "OWNER"
+struct CommitAuthor: Codable {
+    let date, name, email: String?
 }
 
-struct Label: Codable {
-    let id: Int
-    let nodeID: String
-    let url: String
-    let name, color: String
-    let labelDefault: Bool
+struct Tree: Codable {
+    let url: String?
+    let sha: String?
+}
+
+struct Parent: Codable {
+    let url, htmlURL: String?
+    let sha: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case url
+        case htmlURL = "html_url"
+        case sha
+    }
+}
+
+struct Repository: Codable {
+    let id: Int?
+    let nodeID, name, fullName: String?
+    let repositoryPrivate: Bool?
+    let owner: OwnerClass?
+    let htmlURL: String?
+    let description: String?
+    let fork: Bool?
+    let url, forksURL: String?
+    let keysURL, collaboratorsURL: String?
+    let teamsURL, hooksURL: String?
+    let issueEventsURL: String?
+    let eventsURL: String?
+    let assigneesURL, branchesURL: String?
+    let tagsURL: String?
+    let blobsURL, gitTagsURL, gitRefsURL, treesURL: String?
+    let statusesURL: String?
+    let languagesURL, stargazersURL, contributorsURL, subscribersURL: String?
+    let subscriptionURL: String?
+    let commitsURL, gitCommitsURL, commentsURL, issueCommentURL: String?
+    let contentsURL, compareURL: String?
+    let mergesURL: String?
+    let archiveURL: String?
+    let downloadsURL: String?
+    let issuesURL, pullsURL, milestonesURL, notificationsURL: String?
+    let labelsURL, releasesURL: String?
+    let deploymentsURL: String?
     
     enum CodingKeys: String, CodingKey {
         case id
         case nodeID = "node_id"
-        case url, name, color
-        case labelDefault = "default"
+        case name
+        case fullName = "full_name"
+        case repositoryPrivate = "private"
+        case owner
+        case htmlURL = "html_url"
+        case description, fork, url
+        case forksURL = "forks_url"
+        case keysURL = "keys_url"
+        case collaboratorsURL = "collaborators_url"
+        case teamsURL = "teams_url"
+        case hooksURL = "hooks_url"
+        case issueEventsURL = "issue_events_url"
+        case eventsURL = "events_url"
+        case assigneesURL = "assignees_url"
+        case branchesURL = "branches_url"
+        case tagsURL = "tags_url"
+        case blobsURL = "blobs_url"
+        case gitTagsURL = "git_tags_url"
+        case gitRefsURL = "git_refs_url"
+        case treesURL = "trees_url"
+        case statusesURL = "statuses_url"
+        case languagesURL = "languages_url"
+        case stargazersURL = "stargazers_url"
+        case contributorsURL = "contributors_url"
+        case subscribersURL = "subscribers_url"
+        case subscriptionURL = "subscription_url"
+        case commitsURL = "commits_url"
+        case gitCommitsURL = "git_commits_url"
+        case commentsURL = "comments_url"
+        case issueCommentURL = "issue_comment_url"
+        case contentsURL = "contents_url"
+        case compareURL = "compare_url"
+        case mergesURL = "merges_url"
+        case archiveURL = "archive_url"
+        case downloadsURL = "downloads_url"
+        case issuesURL = "issues_url"
+        case pullsURL = "pulls_url"
+        case milestonesURL = "milestones_url"
+        case notificationsURL = "notifications_url"
+        case labelsURL = "labels_url"
+        case releasesURL = "releases_url"
+        case deploymentsURL = "deployments_url"
     }
 }
-
-enum State: String, Codable {
-    case stateOpen = "open"
-}
-
-// MARK: Encode/decode helpers
-
-class JSONNull: Codable, Hashable {
-    
-    public static func == (lhs: JSONNull, rhs: JSONNull) -> Bool {
-        return true
-    }
-    
-    public var hashValue: Int {
-        return 0
-    }
-    
-    public init() {}
-    
-    public required init(from decoder: Decoder) throws {
-        let container = try decoder.singleValueContainer()
-        if !container.decodeNil() {
-            throw DecodingError.typeMismatch(JSONNull.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for JSONNull"))
-        }
-    }
-}
-*/

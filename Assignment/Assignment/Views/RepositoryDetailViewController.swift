@@ -55,11 +55,12 @@ extension RepositoryDetailViewController {
         switch _section {
         case .descriptionCell:
             return 1
+            
         case .issuecell:
             return self.repoIssueViewModel.numberOfRowsInSection()
-        case .contributorCell:
-            return 3
             
+        case .contributorCell:
+            return self.repoContributorViewModel.numberOfRowsInSection()
         }
     }
     
@@ -92,6 +93,8 @@ extension RepositoryDetailViewController {
             return cell
             
         case .contributorCell:
+            let contributor = self.repoContributorViewModel.objectAt(indexPath.row)
+            cell.textLabel?.text = contributor.commit?.committer?.name
             return cell
             
         }
@@ -111,11 +114,13 @@ extension RepositoryDetailViewController{
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
                 self?.activityIndicator.stopAnimating()
+                self?.getRepoContributorList()
             }
             }, failure: { [weak self] (networkError) in
                 print(networkError.statusCode)
                 self?.tableView.reloadData()
                 self?.activityIndicator.stopAnimating()
+                self?.getRepoContributorList()
         })
         
     }
@@ -127,9 +132,9 @@ extension RepositoryDetailViewController{
         
         self.activityIndicator.startAnimating()
         
-        ANetworkHelpher.shared.getIssuesSpecificToRepository(repoName: self.repositoryDescriptionViewModel.repoDetailModel.fullName, language: self.repositoryDescriptionViewModel.repoDetailModel.language, success: { [weak self] (issues) in
-            guard let issues = issues else{return}
-            self?.repoIssueViewModel.addIssuesToViewModel(issues)
+        ANetworkHelpher.shared.getContributorsSpecificToRepository(repoName: self.repositoryDescriptionViewModel.repoDetailModel.fullName, language: self.repositoryDescriptionViewModel.repoDetailModel.language, success: { [weak self] (contributors) in
+            guard let contributors = contributors else{return}
+            self?.repoContributorViewModel.addContributorsToRepoViewModel(contributors)
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
                 self?.activityIndicator.stopAnimating()
