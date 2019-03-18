@@ -1,5 +1,5 @@
 //
-//  LanguageRepoListViewModel.swift
+//  SearchRepositoryViewModel.swift
 //  Assignment
 //
 //  Created by TapashM on 14/03/19.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct LanguageRepoListViewModel {
+struct SearchRepositoryViewModel {
     
     /// This is an **array** of *Item* .
     private var languageRepoResponses = [Item]()

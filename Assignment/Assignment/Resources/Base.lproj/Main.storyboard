@@ -12,7 +12,7 @@
         <!--LanguageRepoListViewController-->
         <scene sceneID="FuO-eW-sHf">
             <objects>
-                <tableViewController title="LanguageRepoListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pB1-yr-4xR" customClass="LanguageRepoListViewController" customModule="Assignment" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="LanguageRepoListViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pB1-yr-4xR" customClass="SearchRepositoryListViewController" customModule="Assignment" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="cGA-rw-t6h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -73,7 +73,7 @@
                     </tableView>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YDG-li-bsm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <navigationItem title="RepositoryDetailViewController" id="M9y-Uw-Q8u"/>
+                <navigationItem title="RepositoryDetail" id="M9y-Uw-Q8u"/>
             </objects>
             <point key="canvasLocation" x="2671" y="780"/>
         </scene>

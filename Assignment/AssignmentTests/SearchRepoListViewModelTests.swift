@@ -1,25 +1,25 @@
 //
-//  AssignmentTests.swift
+//  SearchRepoListViewModelTests.swift
 //  AssignmentTests
 //
-//  Created by TapashM on 14/03/19.
+//  Created by TapashM on 18/03/19.
 //  Copyright © 2019 Tapash. All rights reserved.
 //
 
 import XCTest
 @testable import Assignment
 
-class RepoContributorViewModelTests: XCTestCase {
-    
-    private var repoContributorVM = RepoContributorViewModel()
+class SearchRepoListViewModelTests: XCTestCase {
+
+    private var languageRepoListVM = SearchRepositoryViewModel()
     
     override func setUp() {
-        if let path = Bundle.main.path(forResource: "RepoContributorModel", ofType: "json") {
+        if let path = Bundle.main.path(forResource: "SearchRepository", ofType: "json") {
             
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let repoContributorModel = try? JSONDecoder().decode(RepoContributorModel.self, from: data)
-                repoContributorVM.addContributorsToRepoViewModel(repoContributorModel?.contributors ?? [])
+                let languageRepositoryModel = try? JSONDecoder().decode(SearchRepositoryResponse.self, from: data)
+               languageRepoListVM.addLanguageRepoViewModel(languageRepositoryModel?.items ?? [])
             }
             catch {
                 print("error.localizedDescription\(error.localizedDescription)")
@@ -34,16 +34,16 @@ class RepoContributorViewModelTests: XCTestCase {
     
     func testCheckArrayIsNotEmpty() {
         
-        XCTAssertEqual(repoContributorVM.numberOfRowsInSection(), 1, "number of rows doesn't match with array count")
+        XCTAssertEqual(languageRepoListVM.numberOfRowsInSection(), 1, "number of rows doesn't match with array count")
     }
     
     func testCheckHasObject() {
-        XCTAssertNotNil(repoContributorVM.objectAt(0),"No object found.")
+        XCTAssertNotNil(languageRepoListVM.objectAt(0),"No object found.")
     }
     
     func testCheckHasAllObjectDeleted() {
-        repoContributorVM.removeAllPreviousData()
-        XCTAssertEqual(repoContributorVM.numberOfRowsInSection(),0,"Object is still there.")
+        languageRepoListVM.removeAllPreviousData()
+        XCTAssertEqual(languageRepoListVM.numberOfRowsInSection(),0,"Object is still there.")
     }
     
     func testPerformanceExample() {
@@ -54,3 +54,4 @@ class RepoContributorViewModelTests: XCTestCase {
     }
     
 }
+

@@ -18,11 +18,8 @@ struct APIConstant {
     
     static let kSEARCH_SORTING_ORDER = "&sort=stars&order=desc"
     static let kISSUE_SORTING_ORDER = "&sort=created&order=desc&per_page=3"
-    static let kCONTRIBUTOR_SORTING_ORDER = "&sort=committer-date&order=desc&per_page=3"
-
-    
-//https://api.github.com/search/commits?q=repo:Alamofire/Alamofire+language:Swift&sort=committer-date&order=desc&per_page=3
-//https://api.github.com/search/issues?q=Alamofire/Alamofire+label:bug+language:Swift+state:open&sort=created&order=desc&per_page=3
+    //static let kCONTRIBUTOR_SORTING_ORDER = "&sort=committer-date&order=desc&per_page=3"
+    static let kCONTRIBUTOR_SORTING_ORDER = "&sort=score&order=desc&per_page=3"
     
 }
 

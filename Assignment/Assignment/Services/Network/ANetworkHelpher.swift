@@ -77,7 +77,7 @@ extension ANetworkHelpher{
                     return date_
                 })
                 
-                let languageRepoResponse = try? decoder.decode(LanguageRepositoryResponse.self, from: data!)
+                let languageRepoResponse = try? decoder.decode(SearchRepositoryResponse.self, from: data!)
                 if let incompleteResults = languageRepoResponse?.incompleteResults {
                     if !incompleteResults {
                         success(languageRepoResponse?.items)

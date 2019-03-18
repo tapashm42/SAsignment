@@ -1,5 +1,5 @@
 //
-//  LanguageRepoListViewController.swift
+//  SearchRepositoryListViewController.swift
 //  Assignment
 //
 //  Created by TapashM on 14/03/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LanguageRepoListViewController: UITableViewController {
+class SearchRepositoryListViewController: UITableViewController {
     
     /// This is a **searchController** to serach *specific language* based on user's input.
     let searchController = UISearchController(searchResultsController: nil)
@@ -17,7 +17,7 @@ class LanguageRepoListViewController: UITableViewController {
     let activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
     
     /// This is a **ViewModel** object of *LanguageRepoListViewModel* holds the data and presentation logic.
-    private var languageRepoListViewModel = LanguageRepoListViewModel()
+    private var languageRepoListViewModel = SearchRepositoryViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,10 +25,9 @@ class LanguageRepoListViewController: UITableViewController {
     }
     
     /**
-     This method does all the neccessary UI setup including navigation title size,searchController,activityIndicator.
+     This method does all the neccessary UI setup including searchController,activityIndicator.
      */
     func setupInitialUI() {
-        self.navigationController?.navigationBar.prefersLargeTitles = true
         searchController.searchResultsUpdater = self
         searchController.searchBar.delegate = self
         searchController.searchBar.placeholder = "Please enter any language."
@@ -46,7 +45,7 @@ class LanguageRepoListViewController: UITableViewController {
 }
 
 
-extension LanguageRepoListViewController: UISearchResultsUpdating,UISearchBarDelegate{
+extension SearchRepositoryListViewController: UISearchResultsUpdating,UISearchBarDelegate{
     
     // MARK: - Search controller delegate
     func updateSearchResults(for searchController: UISearchController) {
@@ -62,7 +61,7 @@ extension LanguageRepoListViewController: UISearchResultsUpdating,UISearchBarDel
     }
 }
 
-extension LanguageRepoListViewController {
+extension SearchRepositoryListViewController {
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -83,7 +82,7 @@ extension LanguageRepoListViewController {
     
 }
 
-extension LanguageRepoListViewController {
+extension SearchRepositoryListViewController {
     
     // MARK: - Table view delegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -107,7 +106,7 @@ extension LanguageRepoListViewController {
     }
 }
 
-extension LanguageRepoListViewController {
+extension SearchRepositoryListViewController {
     
     /**
      This is a method that fetches repositories related to a specific language.
