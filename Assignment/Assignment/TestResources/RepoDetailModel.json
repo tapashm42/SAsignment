@@ -1,0 +1,32 @@
+{
+    "StatusCode": 200,
+    "Message": "",
+    "Status": "SUCCESS",
+    "data": [
+             {
+             "tierId": 1,
+             "tierName": "Classic",
+             "tierAmount": 0,
+             "tierFlightCount": 0
+             },
+             {
+             "tierId": 2,
+             "tierName": "Silver",
+             "tierAmount": 25000,
+             "tierFlightCount": 5
+             },
+             {
+             "tierId": 3,
+             "tierName": "Gold",
+             "tierAmount": 75000,
+             "tierFlightCount": 15
+             },
+             {
+             "tierId": 4,
+             "tierName": "Platinum",
+             "tierAmount": 150000,
+             "tierFlightCount": 30
+             }
+             ]
+}
+
