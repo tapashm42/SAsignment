@@ -10,16 +10,34 @@ import XCTest
 @testable import Assignment
 
 class SearchRepoListViewModelTests: XCTestCase {
-
+    
     private var languageRepoListVM = SearchRepositoryViewModel()
     
     override func setUp() {
         if let path = Bundle.main.path(forResource: "SearchRepository", ofType: "json") {
             
             do {
+                let dateFormatterWithTime: DateFormatter = {
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                    return formatter
+                }()
+                
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
+                    let container = try decoder.singleValueContainer()
+                    let dateStr = try container.decode(String.self)
+                    var date: Date? = nil
+                    date = dateFormatterWithTime.date(from: dateStr)
+                    guard let date_ = date else {
+                        throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot decode date string \(dateStr)")
+                    }
+                    return date_
+                })
+                
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let languageRepositoryModel = try? JSONDecoder().decode(SearchRepositoryResponse.self, from: data)
-               languageRepoListVM.addLanguageRepoViewModel(languageRepositoryModel?.items ?? [])
+                let languageRepositoryModel = try? decoder.decode(SearchRepositoryResponse.self, from: data)
+                languageRepoListVM.addLanguageRepoViewModel(languageRepositoryModel?.items ?? [])
             }
             catch {
                 print("error.localizedDescription\(error.localizedDescription)")
@@ -45,13 +63,5 @@ class SearchRepoListViewModelTests: XCTestCase {
         languageRepoListVM.removeAllPreviousData()
         XCTAssertEqual(languageRepoListVM.numberOfRowsInSection(),0,"Object is still there.")
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
 }
 

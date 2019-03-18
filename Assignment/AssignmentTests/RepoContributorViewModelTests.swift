@@ -18,14 +18,13 @@ class RepoContributorViewModelTests: XCTestCase {
             
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let repoContributorModel = try? JSONDecoder().decode(RepoContributorModel.self, from: data)
-                repoContributorVM.addContributorsToRepoViewModel(repoContributorModel?.contributors ?? [])
+                let repoContributorModel:[Contributor] = try! JSONDecoder().decode(ContributorResponse.self, from: data)
+                repoContributorVM.addContributorsToRepoViewModel(repoContributorModel)
             }
             catch {
                 print("error.localizedDescription\(error.localizedDescription)")
             }
         }
-        
     }
     
     override func tearDown() {
@@ -33,8 +32,7 @@ class RepoContributorViewModelTests: XCTestCase {
     }
     
     func testCheckArrayIsNotEmpty() {
-        
-        XCTAssertEqual(repoContributorVM.numberOfRowsInSection(), 1, "number of rows doesn't match with array count")
+        XCTAssertEqual(repoContributorVM.numberOfRowsInSection(), 2, "number of rows doesn't match with array count")
     }
     
     func testCheckHasObject() {
@@ -45,12 +43,4 @@ class RepoContributorViewModelTests: XCTestCase {
         repoContributorVM.removeAllPreviousData()
         XCTAssertEqual(repoContributorVM.numberOfRowsInSection(),0,"Object is still there.")
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
 }

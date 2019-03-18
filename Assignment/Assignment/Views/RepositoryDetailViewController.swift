@@ -55,7 +55,19 @@ extension RepositoryDetailViewController {
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return CellType.allCases[section].HeaderTitle
+        //return CellType.allCases[section].HeaderTitle
+        let _section = CellType.allCases[section]
+        
+        switch _section {
+        case .issuecell:
+            return self.repoIssueViewModel.numberOfRowsInSection() == 0 ? "No Issue available" : "\(self.repoIssueViewModel.numberOfRowsInSection()) \(CellType.allCases[section].HeaderTitle)"
+            
+        case .contributorCell:
+            return self.repoContributorViewModel.numberOfRowsInSection() == 0 ? "No Contributors available" : "\(self.repoContributorViewModel.numberOfRowsInSection()) \(CellType.allCases[section].HeaderTitle)"
+
+        default:
+           return CellType.allCases[section].HeaderTitle
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -107,7 +119,7 @@ extension RepositoryDetailViewController {
             
         case .contributorCell:
             let contributor = self.repoContributorViewModel.objectAt(indexPath.row)
-            cell.textLabel?.text = contributor.commit?.committer?.name
+            cell.textLabel?.text = contributor.login
             return cell
             
         }

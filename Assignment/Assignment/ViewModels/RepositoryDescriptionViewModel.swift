@@ -54,9 +54,9 @@ extension CellType{
             case .descriptionCell:
                 return "Description"
             case .issuecell:
-                return "3 newest issues"
+                return "newest issues"
             case .contributorCell:
-                return "3 top contributors"
+                return "top contributors"
             }
         }
     }

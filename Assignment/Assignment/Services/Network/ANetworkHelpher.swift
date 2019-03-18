@@ -169,46 +169,26 @@ extension ANetworkHelpher{
             DispatchQueue.main.async { _failure(error) }
         }
         
-        let url = "\(APIConstant.kBASE_URL)\(APIConstant.kSEARCH_COMMITS.urlString)repo:\(repoName)+language:\(language)\(APIConstant.kCONTRIBUTOR_SORTING_ORDER)"
-        
-        //https://api.github.com/search/commits?q=repo:Alamofire/Alamofire+language:Swift&sort=committer-date&order=desc&per_page=3
-
+        let url = "\(APIConstant.kBASE_URL)\(APIConstant.kSEARCH_CONTRIBUTORS.urlString)\(repoName)\(APIConstant.kCONTRIBUTOR_SORTING_ORDER)"
         
         let requestModel = NetworkRequestModel(url: url,
-                                               taskIdentifier: APIConstant.kSEARCH_REPOSITORIES.identifier,
+                                               taskIdentifier: APIConstant.kSEARCH_CONTRIBUTORS.identifier,
                                                httpMethod: .GET,
                                                body: nil,
                                                headers: [APIHeadersKeyAndValue.kAuthKey:APIHeadersKeyAndValue.kAuthKeyValue])
         let networkOperation = NetworkOperation(model: requestModel) { (model, data, response, error, statusCode, isSuccess) in
             if isSuccess {
                 
-                let dateFormatterWithTime: DateFormatter = self.getDateFormatterWithTime()
+                let repoContributorModel = try? JSONDecoder().decode(ContributorResponse.self, from: data!)
 
-                let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .custom({ (decoder) -> Date in
-                    let container = try decoder.singleValueContainer()
-                    let dateStr = try container.decode(String.self)
-                    var date: Date? = nil
-                    date = dateFormatterWithTime.date(from: dateStr)
-                    guard let date_ = date else {
-                        throw DecodingError.dataCorruptedError(in: container, debugDescription: "Cannot decode date string \(dateStr)")
-                    }
-                    return date_
-                })
-                
-                let repoContributorModel = try? decoder.decode(RepoContributorModel.self, from: data!)
-                if let incompleteResults = repoContributorModel?.incompleteResults {
-                    if !incompleteResults {
-                        success(repoContributorModel?.contributors)
+                if let repoContributorModel = repoContributorModel {
+                        success(repoContributorModel)
                     } else {
-                        failure(NetworkError.init(statusCode: Int(truncating: NSNumber(value:incompleteResults))))
+                        failure(NetworkError.noRecords)
                     }
                 }
-                else {
-                    failure(NetworkError.notAValidJSON)
-                }
                 
-            } else {
+             else {
                 failure(NetworkError.init(statusCode: nil))
             }
         }
@@ -216,7 +196,7 @@ extension ANetworkHelpher{
     }
     
     func cancelRepositories() {
-        self.cancelOperation(identifier: APIConstant.kSEARCH_COMMITS.identifier)
+        self.cancelOperation(identifier: APIConstant.kSEARCH_CONTRIBUTORS.identifier)
     }
 }
 
